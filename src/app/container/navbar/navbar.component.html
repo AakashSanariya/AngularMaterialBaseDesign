@@ -1,0 +1,38 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" mode="side" opened="true" fixedInViewport="true">
+        <mat-toolbar color="primary">Brainvire</mat-toolbar>
+        <mat-nav-list class="menuItems">
+            <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active"><mat-icon>home</mat-icon>&nbsp; Dashboard</a>
+            <a mat-list-item [routerLink]="['/subadmin/list']" routerLinkActive="active"><mat-icon>person</mat-icon>&nbsp; Manage sub Admin</a>
+            <a mat-list-item [routerLink]="['/user']" routerLinkActive="active"><mat-icon>person</mat-icon>User</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="header">
+        <mat-toolbar color="primary">
+            <div>
+                <button
+                        type="button"
+                        aria-label="Toggle sidenav"
+                        mat-icon-button
+                        (click)="drawer.toggle()">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+            </div>
+            <div class="header-logout">
+                <button mat-button [matMenuTriggerFor]="menu">{{ userName }}</button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item><mat-icon>person</mat-icon>Profile</button>
+                    <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+        <div class="content">
+            <div class="breadcrumb">
+                <app-ng-dynamic-breadcrumb></app-ng-dynamic-breadcrumb>
+            </div>
+            <div>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
