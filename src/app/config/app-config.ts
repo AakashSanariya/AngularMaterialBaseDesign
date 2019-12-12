@@ -21,5 +21,12 @@ export const AppConfig = {
     editSubAdmin: BASE_URL + API + 'subadmin/update/',
     subadminPasswordChange: BASE_URL + API + 'subadmin/password/change',
     deleteSubAdmin: BASE_URL + API + 'subadmin/delete/',
+
+
+    /* Manage User */
+    getManageUserList: BASE_URL + API + 'user/list',
+    changeManageUserStatus: BASE_URL + API + 'user/change_status',
+    changeManageUserPassword: BASE_URL + API + 'user/password/change',
+    deleteManageUser: BASE_URL + API + 'user/delete/',
 };
 

@@ -34,6 +34,10 @@ const routes: Routes = [
       {
         path: 'subadmin',
         loadChildren: './views/subadmin/subadmin.module#SubadminModule'
+      },
+      {
+        path: 'user',
+        loadChildren: './views/manage-user/manage-user.module#ManageUserModule'
       }
     ]
   }

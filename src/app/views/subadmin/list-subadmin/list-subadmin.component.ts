@@ -180,6 +180,7 @@ export class ListSubadminComponent implements OnInit {
       if(result){
         this.toaster.success("Delete User Successfully");
         this.route.navigate(['/subadmin/list']);
+        this.dialog.closeAll();
       }
     }, error => {
       if(error){
