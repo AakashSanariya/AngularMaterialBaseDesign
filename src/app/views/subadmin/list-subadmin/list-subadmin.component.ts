@@ -134,6 +134,8 @@ export class ListSubadminComponent implements OnInit {
     this.subAdminService.changeSubAdminStatus(payload).subscribe(result => {
       if(result){
         this.toaster.success("User Status Change Successfully")
+        this.dataSource.paginator.firstPage();
+        this.dialog.closeAll();
       }
     }, error => {
       if(error){
@@ -160,6 +162,8 @@ export class ListSubadminComponent implements OnInit {
     this.subAdminService.paswordChange(addPayload).subscribe(result => {
       if(result){
         this.toaster.success('Password Change Successfully');
+        this.dataSource.paginator.firstPage();
+        this.dialog.closeAll();
       }
     }, error => {
       if(error){
@@ -180,6 +184,7 @@ export class ListSubadminComponent implements OnInit {
       if(result){
         this.toaster.success("Delete User Successfully");
         this.route.navigate(['/subadmin/list']);
+        this.dataSource.paginator.firstPage();
         this.dialog.closeAll();
       }
     }, error => {
