@@ -12,5 +12,14 @@ export const AppConfig = {
     totalUser: BASE_URL + API + 'subadmin/list',
 
     /* Manage Sub Admin */
-    listSubAdmin: BASE_URL + API + 'subadmin/list'
+    listSubAdmin: BASE_URL + API + 'subadmin/list',
+    activateRole: BASE_URL + API + 'role/list_active/0',
+    filterSubadmin: BASE_URL + API + 'user/list',
+    changeSubAdminStatus: BASE_URL + API + '/subadmin/change_status',
+    subAdminByID: BASE_URL + API + 'subadmin/show/',
+    addNewSubadmin: BASE_URL + API + 'subadmin/create',
+    editSubAdmin: BASE_URL + API + 'subadmin/update/',
+    subadminPasswordChange: BASE_URL + API + 'subadmin/password/change',
+    deleteSubAdmin: BASE_URL + API + 'subadmin/delete/',
 };
+

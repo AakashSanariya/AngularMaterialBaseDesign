@@ -22,12 +22,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     let token = localStorage.getItem('token');
     let currentUser = this.EncrDecr.get(AppConfig.EncrDecrKey, token);
 
-    let currentUserJson = JSON.parse(currentUser);
-    if(currentUserJson){
+    // let currentUserJson = JSON.parse(currentUser);
+    if(currentUser){
       return true;
     }
     else{
-      this.router.navigate(['/403']);
+      this.router.navigate(['/login']);
       return false;
     }
   }
