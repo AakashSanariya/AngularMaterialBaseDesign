@@ -28,5 +28,8 @@ export const AppConfig = {
     changeManageUserStatus: BASE_URL + API + 'user/change_status',
     changeManageUserPassword: BASE_URL + API + 'user/password/change',
     deleteManageUser: BASE_URL + API + 'user/delete/',
+    addNewManageUser: BASE_URL + API + 'user/create',
+    findUserById: BASE_URL + API + 'user/show/',
+    updateUser: BASE_URL + API + 'user/update/',
 };
 

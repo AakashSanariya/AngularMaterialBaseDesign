@@ -8,4 +8,11 @@ export class ManageUser {
     confirmPassword: string;
     status: string;
     roles: any;
+    image: any;
+    image_url: any;
+    date_of_birth: any;
+    phone_number: any;
+    gender: string;
+    profile_image: any;
+    fullname: string;
 }

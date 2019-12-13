@@ -1,0 +1,212 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Edit Form-->
+<div #loaded>
+    <mat-card>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)" [mustMatch]="['password', 'confirmPassword']">
+                <mat-label>Profile Photo</mat-label>
+                <mat-grid-list cols="2" rowHeight="200">
+                    <div class="filter selectImage">
+                        <mat-grid-tile>
+                            <div class="chooseImage">
+                                <img src="{{ croppedImage }}" *ngIf="croppedImage" height="170" width="250">
+                                <input type="file" class="browse" name="image" #image="ngModel" id="profile_image"
+                                       [(ngModel)]="EditDetails.image_url"
+                                       (change)="onChange($event)"
+                                >
+                            </div>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <div class="imagecropper" *ngIf="imageChangedEvent">
+                                <image-cropper
+                                        [imageChangedEvent]="imageChangedEvent"
+                                        [maintainAspectRatio]="true"
+                                        [aspectRatio]="1/1"
+                                        [resizeToWidth]="128"
+                                        format="png"
+                                        (imageCropped)="imageCropped($event)"
+                                        (imageLoaded)="imageLoaded()"
+                                        (cropperReady)="cropperReady()"
+                                        (loadImagefailed)="loadImageFailed()"
+                                ></image-cropper>
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+                <mat-grid-list cols="2" rowHeight="6:1">
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>First Name</mat-label>
+                                <input type="text" name="first_name" [(ngModel)]="EditDetails.first_name"
+                                       matInput
+                                       placeholder="Enter First Name"
+                                       #first_name="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.first_name.errors?.required">Please Enter First Name</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.first_name.errors?.minlength">First Name length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Last Name</mat-label>
+                                <input type="text" name="last_name" [(ngModel)]="EditDetails.last_name"
+                                       matInput
+                                       placeholder="Enter Last_name"
+                                       #last_name="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.last_name.errors?.required">Please Enter Last Name</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.last_name.errors?.minlength">Last Name length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>User Name</mat-label>
+                                <input type="text" name="username" [(ngModel)]="EditDetails.username"
+                                       matInput
+                                       placeholder="Enter User Name"
+                                       #username="ngModel"
+                                       required
+                                       minlength="5"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.username.errors?.required">Please Enter User Name</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.username.errors?.minlength">User Name length should be min 5 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input type="email" name="email" [(ngModel)]="EditDetails.email"
+                                       matInput
+                                       placeholder="Enter Email"
+                                       #email="ngModel"
+                                       [disabled]="disabled"
+                                       [required]="disabled"
+                                       email
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.email.errors?.required">Please Enter Email</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.email.errors?.email">Please Enter Valid Email</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter" *ngIf="displayPassword">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Password</mat-label>
+                                <input type="password" name="password" [(ngModel)]="EditDetails.password"
+                                       matInput
+                                       #password="ngModel"
+                                       placeholder="Enter Password"
+                                       required
+                                       minlength="6"
+                                       pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%])(?=[^^&*()_\+]*$).{6,}"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.password.errors?.required">Please Enter Password</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.password.errors?.minlength">Password length should be min 6 cha.</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.password.errors?.pattern">Password Contain a One Small and Capital And number and special character not Contain ^&*()_+</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Confirm Password</mat-label>
+                                <input type="password" name="confirmPassword" #confirmPassword="ngModel"
+                                       [(ngModel)]="EditDetails.confirmPassword"
+                                       matInput
+                                       placeholder="Enter Confirm Password"
+                                       required
+                                       minlength="6"
+                                       pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%])(?=[^^&*()_\+]*$).{6,}"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.confirmPassword.errors?.required">Please Enter Confirm Password</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.confirmPassword.errors?.minlength">Confirm Password length should be min 6 cha.</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.confirmPassword.errors?.pattern">Confirm Password should match with password</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Date Of Birth</mat-label>
+                                    <input type="text" matInput [matDatepicker]="picker"
+                                           name="date_of_birth"
+                                           #date_of_birth="ngModel"
+                                           [(ngModel)]="EditDetails.date_of_birth"
+                                           placeholder="MM/DD/YYYY"
+                                           [value]="EditDetails.date_of_birth"
+                                           (click)="picker.open()"
+                                           [max]="maxDate"
+                                           required
+                                    >
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker touchUi #picker></mat-datepicker>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.date_of_birth.errors?.required">Please Select a date</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phone Number</mat-label>
+                                <input type="text" name="phone_number" [(ngModel)]="EditDetails.phone_number"
+                                       matInput
+                                       placeholder="Enter Phone Number"
+                                       #phone_number="ngModel"
+                                       required
+                                       minlength="10"
+                                       maxlength="10"
+                                       pattern="[0-9]{10}"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.phone_number.errors?.required">Please Enter Phone Number</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.phone_number.errors?.minlength">Phone No. length should be min 10 cha.</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.phone_number.errors?.maxlength">Phone No. length should be max 10 cha.</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.phone_number.errors?.pattern">Phone No. Contains Only Number</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-label>Gender &nbsp;</mat-label>
+                            <mat-radio-group aria-label="Select an gender" name="gender"
+                                             #gender="ngModel"
+                                             [(ngModel)]="EditDetails.gender"
+                            >
+                                <mat-radio-button value="Male">Male &nbsp;</mat-radio-button>
+                                <mat-radio-button value="Female">Female</mat-radio-button>
+                            </mat-radio-group>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.gender.errors?.required">Please Select Gender</mat-error>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile></mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Save</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

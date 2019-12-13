@@ -1,0 +1,103 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+<div #loaded>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h3>User Profile</h3>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div>
+                <a class="addNewButton" [routerLink]="['/user/list']"><button  mat-flat-button color="primary"><mat-icon>arrow_back</mat-icon>Back</button></a>
+            </div>
+        </mat-card-content>
+        <mat-card-content>
+            <div>
+                <mat-grid-list cols="1" rowHeight="5:1">
+                    <div class="filter selectImage">
+                        <mat-grid-tile>
+                            <div class="chooseImage">
+                                <img src="{{ userProfile.profile_image }}" height="170" width="250">
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+                <mat-grid-list cols="2" rowHeight="12:1">
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <div class="userProfileGrid">
+                                <div class="css-grid-tile top-left">
+                                    Full Name
+                                </div>
+                                <div class="css-grid-tile top-right">
+                                    {{ userProfile.first_name + ' ' + userProfile.last_name }}
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <div class="userProfileGrid">
+                                <div class="css-grid-tile top-left">
+                                    Email
+                                </div>
+                                <div class="css-grid-tile top-right">
+                                    {{ userProfile.email }}
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <div class="userProfileGrid">
+                                <div class="css-grid-tile top-left">
+                                    Phone Number
+                                </div>
+                                <div class="css-grid-tile top-right">
+                                    {{ userProfile.phone_number }}
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <div class="userProfileGrid">
+                                <div class="css-grid-tile top-left">
+                                    Date Of Birth
+                                </div>
+                                <div class="css-grid-tile top-right">
+                                    {{ userProfile.date_of_birth }}
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <div class="userProfileGrid">
+                                <div class="css-grid-tile top-left">
+                                    Gender
+                                </div>
+                                <div class="css-grid-tile top-right">
+                                    {{ userProfile.gender }}
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+                    <div class="filter">
+                        <mat-grid-tile>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
