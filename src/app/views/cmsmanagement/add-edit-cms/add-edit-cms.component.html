@@ -1,0 +1,92 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Edit Form-->
+<div #loaded>
+    <mat-card>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
+                <mat-grid-list cols="1" rowHeight="8:1">
+
+                    <div class="filter">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Page Title</mat-label>
+                                <input type="text" name="page_title" [(ngModel)]="EditDetails.page_title"
+                                       matInput
+                                       placeholder="Enter Page Title"
+                                       #page_title="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.page_title.errors?.required">Please Enter Page Title</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.page_title.errors?.minlength">Page Title length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                    </div>
+
+                    <div class="filter">
+                        <ck-editor name="description" skin="moono-lisa" language="en"
+                                   [(ngModel)]="EditDetails.description"
+                                   #description="ngModel"
+                                   [fullPage]="true"
+                                   required
+                        >
+                        </ck-editor>
+                        <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.description.errors?.required">Description Filed is Required</mat-error>
+                    </div>
+
+                    <div class="filter">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Meta Title</mat-label>
+                            <input type="text" name="meta_keywords" [(ngModel)]="EditDetails.meta_keywords"
+                                   matInput
+                                   placeholder="Enter Page Meta Title"
+                                   #meta_keywords="ngModel"
+                                   required
+                            >
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.meta_keywords.errors?.required">Please Enter Meta Keyword</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Meta Description</mat-label>
+                            <input type="text" name="meta_description" [(ngModel)]="EditDetails.meta_description"
+                                   matInput
+                                   placeholder="Enter Page Meta Description"
+                                   #meta_description="ngModel"
+                                   required
+                            >
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.meta_description.errors?.required">Please Enter Meta Description</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-label>Status &nbsp;</mat-label>
+                            <mat-radio-group aria-label="Select an Status" name="status"
+                                             #status="ngModel"
+                                             [(ngModel)]="EditDetails.status"
+                                             required
+                            >
+                                <mat-radio-button value="Active">Active &nbsp;</mat-radio-button>
+                                <mat-radio-button value="Inactive">Inactive</mat-radio-button>
+                            </mat-radio-group>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.status.errors?.required">Status Filed Required</mat-error>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Save</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
