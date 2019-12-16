@@ -31,5 +31,12 @@ export const AppConfig = {
     addNewManageUser: BASE_URL + API + 'user/create',
     findUserById: BASE_URL + API + 'user/show/',
     updateUser: BASE_URL + API + 'user/update/',
+
+    /* CMS Management */
+    getAllCmsList: BASE_URL + API + 'content_page/list',
+    changeCmsStauts: BASE_URL + API + 'content_page/change_status',
+    getCmsById: BASE_URL + API + 'content_page/show/',
+    addCms: BASE_URL + API + 'content_page/create',
+    updateCms: BASE_URL + API + 'content_page/update/',
 };
 

@@ -38,6 +38,10 @@ const routes: Routes = [
       {
         path: 'user',
         loadChildren: './views/manage-user/manage-user.module#ManageUserModule'
+      },
+      {
+        path: 'cmsmanagement',
+        loadChildren: './views/cmsmanagement/cmsmanagement.module#CmsmanagementModule'
       }
     ]
   }

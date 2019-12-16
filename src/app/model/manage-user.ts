@@ -15,4 +15,8 @@ export class ManageUser {
     gender: string;
     profile_image: any;
     fullname: string;
+    page_title: string;
+    description: any;
+    meta_keywords: string;
+    meta_description: string;
 }
