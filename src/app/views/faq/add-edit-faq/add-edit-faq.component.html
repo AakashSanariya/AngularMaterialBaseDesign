@@ -1,0 +1,82 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Edit Form-->
+<div #loaded>
+    <mat-card>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)" [mustMatch]="['password', 'confirmPassword']">
+                <mat-grid-list cols="1" rowHeight="8:1">
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>FAQ Topic</mat-label>
+                                    <mat-select name="faq_topic_id" #faq_topic_id="ngModel" [(ngModel)]="EditDetails.faq_topic_id" required>
+                                        <mat-option *ngFor="let list of topicList" [value]="list.id">
+                                            {{ list.topic_name }}
+                                        </mat-option>
+                                    </mat-select>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.faq_topic_id.errors?.required">Please Select FAQ Topic</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Question</mat-label>
+                                <input type="text" name="question" [(ngModel)]="EditDetails.question"
+                                       matInput
+                                       placeholder="Enter Question"
+                                       #question="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.question.errors?.required">Please Enter Question</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.question.errors?.minlength">Question length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Answer</mat-label>
+                                <textarea matInput  name="answer" #answer="ngModel" [(ngModel)]="EditDetails.answer" placeholder="Enter Answer" minlength="5" required></textarea>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.answer.errors?.required">Please Enter Answer</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.answer.errors?.minlength">Answer length should be min 5 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-label>Status &nbsp;</mat-label>
+                            <mat-radio-group aria-label="Select an Status" name="status"
+                                             #status="ngModel"
+                                             [(ngModel)]="EditDetails.status"
+                                             required
+                            >
+                                <mat-radio-button value="Active">Active &nbsp;</mat-radio-button>
+                                <mat-radio-button value="Inactive">Inactive</mat-radio-button>
+                            </mat-radio-group>&nbsp;
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.status.errors?.required">Status Filed Required</mat-error>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Save</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

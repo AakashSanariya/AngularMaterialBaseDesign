@@ -21,9 +21,12 @@ export class ManageUser {
     meta_description: string;
     name: string;
     parent_name: string;
-    parent_category: string;
     email_subject: string;
     email_body: string;
+    question: string;
+    faq_topic: string;
+    faq_topic_id: string;
+    answer: string;
 
 
 }

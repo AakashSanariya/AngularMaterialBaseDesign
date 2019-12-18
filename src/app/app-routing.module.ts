@@ -50,6 +50,10 @@ const routes: Routes = [
       {
         path: 'emailtemplate',
         loadChildren: './views/email-template/email-template.module#EmailTemplateModule'
+      },
+      {
+        path: 'faq',
+        loadChildren: './views/faq/faq.module#FaqModule'
       }
     ]
   }

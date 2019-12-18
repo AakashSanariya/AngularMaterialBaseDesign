@@ -53,5 +53,14 @@ export const AppConfig = {
     getAllEmailTemplate: BASE_URL + API + 'email_template/list',
     getEmailTemplateById: BASE_URL + API + 'email_template/show/',
     updateEmailTemplate: BASE_URL + API + 'email_template/update/',
+
+    /* Faq Management*/
+    getAllFaq: BASE_URL + API + 'faq/list',
+    changeFaqStatus: BASE_URL + API + 'faq/change_status',
+    deleteFaq: BASE_URL + API + 'faq/delete/',
+    getFaqById: BASE_URL + API + 'faq/show/',
+    getFaqTopicList: BASE_URL + API + 'faq_topic/list',
+    updateFaq: BASE_URL + API + 'faq/update/',
+    createNewFaq: BASE_URL + API + 'faq/create',
 };
 
