@@ -19,4 +19,8 @@ export class ManageUser {
     description: any;
     meta_keywords: string;
     meta_description: string;
+    name: string;
+    parent_name: string;
+    parent_category: string;
+
 }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/Constant";
+@import '~angular-tree-component/dist/angular-tree-component.css';
 body{
   background-color: #DCDCDC;
 }
@@ -111,6 +112,7 @@ body{
 /* Card Add New Button*/
 .addNewButton{
   float: right;
+  margin-right: 1%;
 }
 /* Material Table */
 .materialTable{
@@ -213,4 +215,9 @@ body{
       grid-column: 1 / 3;
     }
   }
+}
+
+/* card Header Align Button Right Side*/
+.card-header-right{
+  justify-content: flex-end !important;
 }

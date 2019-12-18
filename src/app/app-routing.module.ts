@@ -42,6 +42,14 @@ const routes: Routes = [
       {
         path: 'cmsmanagement',
         loadChildren: './views/cmsmanagement/cmsmanagement.module#CmsmanagementModule'
+      },
+      {
+        path: 'category',
+        loadChildren: './views/category-manage/category-manage.module#CategoryManageModule'
+      },
+      {
+        path: 'emailtemplate',
+        loadChildren: './views/email-template/email-template.module#EmailTemplateModule'
       }
     ]
   }

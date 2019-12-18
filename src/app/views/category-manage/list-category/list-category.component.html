@@ -1,0 +1,102 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Listing Sub Admin-->
+<div>
+    <mat-card #loaded>
+        <mat-card-header>
+            <mat-card-title>
+                <h4>List Category</h4>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="materialTable">
+            <a [routerLink]="['/category/treeview']" class="addNewButton"><button mat-flat-button color="primary">Tree View Category</button></a>
+            <a [routerLink]="['/category/add']" class="addNewButton"><button mat-flat-button color="primary">Add Category</button></a>
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+
+            <div class="table-text mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- Sr No Column -->
+                    <ng-container matColumnDef="SrNo">
+                        <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                        <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+                    </ng-container>
+
+                    <!-- Category Name Column -->
+                    <ng-container matColumnDef="categoryName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="categoryName"> Category Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    </ng-container>
+
+                    <!-- Parent Category Name Column -->
+                    <ng-container matColumnDef="parentCategory">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="parentCategory"> Parent Category </th>
+                        <td mat-cell *matCellDef="let row"> {{row.parent_name}} </td>
+                    </ng-container>
+
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> Status </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-fab color="primary" *ngIf="row.status == 'Active' ">{{ row.status }}</button>
+                            <button mat-fab color="warn" *ngIf="row.status == 'Inactive' ">{{ row.status }}</button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-button color="warn" [routerLink]="['/category/edit/', row.id]"><mat-icon>edit</mat-icon></button>
+                            <mat-slide-toggle
+                                    [color]="accent"
+                                    [checked]="row.status == 'Active'"
+                                    [disabled]="disabled"
+                                    (click)="openDialog(template, row)"
+                            >
+                            </mat-slide-toggle>
+                            <button mat-button color="warn" (click)="openDeleteDialog(deleteUser, row)"><mat-icon>delete</mat-icon></button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<!-- Status Change Dialog-->
+<ng-template #template>
+    <h1 mat-dialog-title>Confirm</h1>
+    <div mat-dialog-content>
+        <p>Confirm to change status?</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
+        <button mat-raised-button  cdkFocusInitial (click)="changeCategoryStatus()" color="warn">Change</button>
+    </div>
+</ng-template>
+
+<!-- Delete Sub Admin Dialog-->
+<ng-template #deleteUser>
+    <h1 mat-dialog-title>Confirm</h1>
+    <div mat-dialog-content>
+        <p>Are You Sure to Delete?</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
+        <button mat-raised-button  cdkFocusInitial (click)="deleteCategorybyId()" color="warn">Delete</button>
+    </div>
+</ng-template>

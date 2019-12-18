@@ -1,0 +1,88 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Edit Form-->
+<div #loaded>
+    <mat-card>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)" [mustMatch]="['password', 'confirmPassword']">
+                <mat-grid-list cols="2" rowHeight="6:1">
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Category Name</mat-label>
+                                <input type="text" name="name" [(ngModel)]="EditDetails.name"
+                                       matInput
+                                       placeholder="Enter Category Name"
+                                       #name="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.name.errors?.required">Please Enter Category Name</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.name.errors?.minlength">Category Name length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <div class="mat-form-field-infix">
+                                <tree-select class="" name="parent_id" placeholder="Select Parent Category"
+                                             appearance="outline"
+                                             matNativeControl
+                                             [items]="parentCategoryData"
+                                             childrenField="children"
+                                             [(ngModel)]="parenttoparentCategory"
+                                             idField= 'id'
+                                             textField= 'name'
+                                ></tree-select>
+                            </div>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.parent_id.errors?.required">Please Select Parent Category</mat-error>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Category Description</mat-label>
+                                <textarea matInput
+                                          name="description"
+                                          [(ngModel)]="EditDetails.description"
+                                          #description="ngModel"
+                                          required
+                                          minlength="3"
+                                          placeholder="Enter Category Description"
+                                >
+                                </textarea>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.description.errors?.required">Please Enter Category Description</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.description.errors?.minlength">Category Description length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-label>Status &nbsp;</mat-label>
+                            <mat-radio-group aria-label="Select a Status" name="status"
+                                             #status="ngModel"
+                                             [(ngModel)]="EditDetails.status"
+                            >
+                                <mat-radio-button value="Active">Active &nbsp;</mat-radio-button>
+                                <mat-radio-button value="Inactive">Inactive</mat-radio-button>
+                            </mat-radio-group>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.status.errors?.required">Please Select Status</mat-error>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Save</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

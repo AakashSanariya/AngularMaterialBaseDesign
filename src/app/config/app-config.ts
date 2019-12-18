@@ -38,5 +38,15 @@ export const AppConfig = {
     getCmsById: BASE_URL + API + 'content_page/show/',
     addCms: BASE_URL + API + 'content_page/create',
     updateCms: BASE_URL + API + 'content_page/update/',
+
+    /* Category Management*/
+    getallCategory: BASE_URL + API + 'category/list',
+    changeCategoryStatus: BASE_URL + API + 'category/change_status',
+    deleteCategoryById: BASE_URL + API + 'category/delete/',
+    findCategoryById: BASE_URL + API + 'category/show/',
+    findParentCategory: BASE_URL + API + 'category/parent_list/',
+    updateCategory: BASE_URL + API + 'category/update/',
+    createCategory: BASE_URL + API + 'category/create',
+    getCategoryTreeView: BASE_URL + API + 'category/treeview/ng6',
 };
 

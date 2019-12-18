@@ -31,7 +31,9 @@ import {SharedModule} from "./shared/shared.module";
     FormsModule,
     HttpClientModule,
     SharedModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      closeButton: true,
+    }),
     NgxPermissionsModule.forRoot(),
     AppMaterialModule,
     MatSidenavModule,
