@@ -37,7 +37,6 @@ export class ListFaqComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
       }
     }, error => {
       if(error){
