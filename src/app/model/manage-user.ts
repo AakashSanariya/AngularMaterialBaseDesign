@@ -22,5 +22,8 @@ export class ManageUser {
     name: string;
     parent_name: string;
     parent_category: string;
+    email_subject: string;
+    email_body: string;
+
 
 }

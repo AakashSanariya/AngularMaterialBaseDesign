@@ -1,0 +1,51 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Edit Form-->
+<div #loaded>
+    <mat-card>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
+                <mat-grid-list cols="1" rowHeight="8:1">
+
+                    <div class="filter">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Subject</mat-label>
+                            <input type="text" name="email_subject" [(ngModel)]="EditDetails.email_subject"
+                                   matInput
+                                   placeholder="Enter Email Subject"
+                                   #page_title="ngModel"
+                                   required
+                                   minlength="3"
+                            >
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.email_subject.errors?.required">Please Enter Email Subject</mat-error>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.email_subject.errors?.minlength">Email Subject length should be min 3 cha.</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter" *ngIf="email_body">
+                        <ck-editor name="email_body" skin="moono-lisa" language="en"
+                                   #email_body="ngModel"
+                                   [(ngModel)]="EditDetails.email_body"
+                                   [fullPage]="true"
+
+                        >
+                        </ck-editor>
+                        <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.email_body?.errors?.required">Description Filed is Required</mat-error>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Save</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -48,5 +48,10 @@ export const AppConfig = {
     updateCategory: BASE_URL + API + 'category/update/',
     createCategory: BASE_URL + API + 'category/create',
     getCategoryTreeView: BASE_URL + API + 'category/treeview/ng6',
+    
+    /* Email Template Management*/
+    getAllEmailTemplate: BASE_URL + API + 'email_template/list',
+    getEmailTemplateById: BASE_URL + API + 'email_template/show/',
+    updateEmailTemplate: BASE_URL + API + 'email_template/update/',
 };
 
