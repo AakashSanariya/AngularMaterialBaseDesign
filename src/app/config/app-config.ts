@@ -70,5 +70,10 @@ export const AppConfig = {
     changeRoleStatus: BASE_URL + API + 'role/change_status',
     updateRole: BASE_URL + API + 'role/update/',
     addNewRole: BASE_URL + API + 'role/create',
+
+    /* Settings Management*/
+    getImageData: BASE_URL + API + VERSION + 'config/logo',
+    getSettingData: BASE_URL + API + 'configuration/list',
+    saveSettingData: BASE_URL + API + 'configuration/update',
 };
 

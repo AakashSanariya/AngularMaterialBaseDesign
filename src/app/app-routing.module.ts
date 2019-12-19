@@ -58,6 +58,10 @@ const routes: Routes = [
       {
         path: 'rolepermission',
         loadChildren: './views/role-permission/role-permission.module#RolePermissionModule'
+      },
+      {
+        path: 'settings',
+        loadChildren: './views/settings/settings.module#SettingsModule'
       }
     ]
   }

@@ -1,2 +1,3 @@
-export class AppConstant {
-}
+export const AppConstant = {
+    siteName:'Base Angular Admin',
+};

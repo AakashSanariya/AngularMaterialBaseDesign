@@ -27,6 +27,14 @@ export class ManageUser {
     faq_topic: string;
     faq_topic_id: string;
     answer: string;
+    site_name: string;
+    tag_line: string;
+    support_email: string;
+    contact_email: string;
+    contact_number: string;
+    default_language: string
+    address:string;
+
 
 
 }

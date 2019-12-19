@@ -1,0 +1,167 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Edit Form-->
+<div #loaded>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>General Settings</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
+
+
+                <mat-grid-list cols="2" rowHeight="200">
+                    <div class="filter selectImage">
+                        <mat-grid-tile>
+                            <div class="chooseImage">
+                                <img [src]="logoURL" *ngIf="logoURL" height="170" width="250">
+                                <input type="file" class="browse" name="profile_logo" #profile_logo="ngModel" id="profile_logo"
+                                       [(ngModel)]="EditDetails.logoURL"
+                                       (change)="changeLogoImage($event)"
+                                >
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="imagecropper">
+                                <img [src]="faviconURL" *ngIf="faviconURL" height="170" width="250">
+                                <input type="file" class="browse" name="profile_favicon" #profile_favicon="ngModel" id="profile_favicon"
+                                       [(ngModel)]="EditDetails.faviconURL"
+                                       (change)="changeFavImage($event)"
+                                >
+                            </div>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+
+                <mat-grid-list cols="2" rowHeight="6:1">
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Site Name</mat-label>
+                                <input type="text" name="site_name" [(ngModel)]="EditDetails.site_name"
+                                       matInput
+                                       placeholder="Enter Site Name"
+                                       #site_name="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.site_name.errors?.required">Please Enter Site Name</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.site_name.errors?.minlength">Site Name length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tag Line</mat-label>
+                                <input type="text" name="tag_line" [(ngModel)]="EditDetails.tag_line"
+                                       matInput
+                                       placeholder="Enter Tag Line"
+                                       #tag_line="ngModel"
+                                       required
+                                       minlength="3"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.tag_line.errors?.required">Please Enter Tag Line</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.tag_line.errors?.minlength">Tag Line length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Support Email</mat-label>
+                                <input type="email" name="support_email" [(ngModel)]="EditDetails.support_email"
+                                       matInput
+                                       placeholder="Enter Support Email"
+                                       #support_email="ngModel"
+                                       required
+                                       email
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.support_email.errors?.required">Please Enter Support</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.support_email.errors?.email">Please Enter Valid Support Email</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Contact Email</mat-label>
+                                <input type="email" name="contact_email" [(ngModel)]="EditDetails.contact_email"
+                                       matInput
+                                       placeholder="Enter Contact Email"
+                                       #contact_email="ngModel"
+                                       required
+                                       email
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.contact_email.errors?.required">Please Enter Contact Email</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.contact_email.errors?.email">Please Enter Valid Contact Email</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Contact Number</mat-label>
+                                <input type="text" name="contact_number" [(ngModel)]="EditDetails.contact_number"
+                                       matInput
+                                       placeholder="Enter Contact Number"
+                                       #contact_number="ngModel"
+                                       required
+                                       pattern="^((\\+91-?)|0)?[0-9]{10}$" minlength="10" maxlength="10"
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.contact_number.errors?.required">Please Enter Contact Number</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.contact_number.errors?.pattern">Please Enter Valid Contact Number.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Default Language</mat-label>
+                                <input type="text" name="default_language" [(ngModel)]="EditDetails.default_language"
+                                       matInput
+                                       placeholder="Enter Default Language"
+                                       #default_language="ngModel"
+                                       required
+                                >
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.default_language.errors?.required">Please Enter Default Language</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Address</mat-label>
+                                <textarea matInput name="address" [(ngModel)]="EditDetails.address"
+                                          matInput
+                                          placeholder="Enter Address"
+                                          #address="ngModel"
+                                          required
+                                          minlength="3"
+                                >
+                                </textarea>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.address.errors?.required">Please Enter Address</mat-error>
+                                <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.address.errors?.minlength">Address length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile></mat-grid-tile>
+                    </div>
+
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Save</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
