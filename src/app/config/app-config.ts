@@ -62,5 +62,13 @@ export const AppConfig = {
     getFaqTopicList: BASE_URL + API + 'faq_topic/list',
     updateFaq: BASE_URL + API + 'faq/update/',
     createNewFaq: BASE_URL + API + 'faq/create',
+
+    /* Role And Permission MAnagement */
+    getAllRoleList: BASE_URL + API + 'role/list',
+    getAllPermissionList: BASE_URL + API + 'permission/list',
+    assignPermission: BASE_URL + API + 'permission/role_assign/',
+    changeRoleStatus: BASE_URL + API + 'role/change_status',
+    updateRole: BASE_URL + API + 'role/update/',
+    addNewRole: BASE_URL + API + 'role/create',
 };
 

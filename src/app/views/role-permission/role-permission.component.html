@@ -1,0 +1,181 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="m-2" #loaded>-->
+    <mat-grid-list cols="2" rowHeight="3:2">
+        <!-- First Column-->
+        <mat-grid-tile [rowspan]="2">
+            <mat-card class="mat-card-permission">
+                <mat-card-header>
+                    <div align="flex-start">
+
+                    </div>
+                </mat-card-header>
+                <mat-card-content>
+                    <div align="right">
+                        <button mat-flat-button color="primary" (click)="savePermission()">Save</button>
+                    </div>
+                    <mat-form-field>
+                            <mat-label>Select Role</mat-label>
+                            <mat-select [(ngModel)]="currRoleId" (ngModelChange)="getAllPermissionList(currRoleId)">
+                                <mat-option *ngFor="let role of listRole" [value]="role.id">{{ role.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    <div>
+                        <ngx-treeview [config]="config" [items]="items" (filterChange)="onFilterChange($event)" (selectedChange)="values = $event" [itemTemplate]="itemTemplate">
+                        </ngx-treeview>
+
+                        <ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+                            <div class="form-inline row-item">
+                                <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
+                                <div class="form-check">
+                                    <mat-checkbox color="primary" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled" [indeterminate]="item.indeterminate" ></mat-checkbox>
+                                    <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
+                                        {{item.text}}
+                                    </label>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+        <!-- Second Column -->
+        <mat-grid-tile [rowspan]="2">
+                <mat-card #loaded>
+                    <mat-card-header>
+                        <mat-card-title>
+                            <h4>List Role</h4>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="materialTable">
+                        <a class="addNewButton"><button mat-flat-button color="primary" (click)="addNewRole(addRole)">Add New Role</button></a>
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+
+                        <div class="table-text mat-elevation-z8">
+                            <table mat-table [dataSource]="dataSource" matSort>
+
+                                <!-- Sr No Column -->
+                                <ng-container matColumnDef="SrNo">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header="SrNo"> Sr No </th>
+                                    <td mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </td>
+                                </ng-container>
+
+                                <!-- Title Column -->
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Title </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                                </ng-container>
+
+
+                                <!-- Status Column -->
+                                <ng-container matColumnDef="status">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> Status </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <button mat-fab color="primary" *ngIf="row.status == 'Active' ">{{ row.status }}</button>
+                                        <button mat-fab color="warn" *ngIf="row.status == 'Inactive' ">{{ row.status }}</button>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <button mat-button color="warn" (click)="openEditRole(editTemplate, row)"><mat-icon>edit</mat-icon></button>
+                                        <mat-slide-toggle
+                                                [color]="accent"
+                                                [checked]="row.status == 'Active'"
+                                                [disabled]="disabled"
+                                                (click)="openDialog(template, row)"
+                                        >
+                                        </mat-slide-toggle>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+<!--</div>-->
+
+<!-- Status Change Dialog-->
+<ng-template #template>
+    <h1 mat-dialog-title>Confirm</h1>
+    <div mat-dialog-content>
+        <p>Confirm to change status?</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
+        <button mat-raised-button  cdkFocusInitial (click)="changeRoleStatus()" color="warn">Change</button>
+    </div>
+</ng-template>
+
+<!--Edit Role-->
+<ng-template #editTemplate>
+    <h1 mat-dialog-title>Edit Role</h1>
+    <div mat-dialog-content>
+        <form #editRoleForm="ngForm" (ngSubmit)="editRoleForm.form.valid && editRole(editRoleForm.value)">
+            <div class="filter">
+                <div>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Enter Role</mat-label>
+                        <input type="role" name="name" #name="ngModel" [(ngModel)]="editRoleDialog.name" matInput placeholder="Enter Role"
+                               required
+                               minlength="3"
+                        >
+                        <mat-error *ngIf="editRoleForm.invalid && editRoleForm.controls.name.errors?.required">Please Enter Role</mat-error>
+                        <mat-error *ngIf="editRoleForm.invalid && editRoleForm.controls.name.errors?.minlength">Role length should be min 3 cha.</mat-error>
+                    </mat-form-field>
+                    <input type="hidden" name="status" #status="ngModel" [(ngModel)]="editRoleDialog.status">
+                </div>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
+                    <button type="submit" mat-raised-button  cdkFocusInitial color="warn">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!--Add New Role-->
+<ng-template #addRole>
+    <h1 mat-dialog-title>Edit Role</h1>
+    <div mat-dialog-content>
+        <form #addRoleForm="ngForm" (ngSubmit)="addRoleForm.form.valid && onSaveRole(addRoleForm.value)">
+            <div class="filter">
+                <div>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Enter Role</mat-label>
+                        <input type="role" name="name" #name="ngModel" [(ngModel)]="roleName" matInput placeholder="Enter Role"
+                               required
+                               minlength="3"
+                        >
+                        <mat-error *ngIf="addRoleForm.invalid && addRoleForm.controls.name.errors?.required">Please Enter Role</mat-error>
+                        <mat-error *ngIf="addRoleForm.invalid && addRoleForm.controls.name.errors?.minlength">Role length should be min 3 cha.</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
+                    <button type="submit" mat-raised-button  cdkFocusInitial color="warn">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

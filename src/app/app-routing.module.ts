@@ -54,6 +54,10 @@ const routes: Routes = [
       {
         path: 'faq',
         loadChildren: './views/faq/faq.module#FaqModule'
+      },
+      {
+        path: 'rolepermission',
+        loadChildren: './views/role-permission/role-permission.module#RolePermissionModule'
       }
     ]
   }
