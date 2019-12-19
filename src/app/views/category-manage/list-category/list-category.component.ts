@@ -65,7 +65,7 @@ export class ListCategoryComponent implements OnInit {
   };
 
   cancel = ():void => {
-    // this.dialogRef.close();
+    this.ngOnInit();
   };
 
   /* Status change Click*/
@@ -88,7 +88,7 @@ export class ListCategoryComponent implements OnInit {
     this.categoryManageService.changeCategoryStatus(payload).subscribe(result => {
       if(result){
         this.toaster.success("User Status Change Successfully");
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
@@ -110,7 +110,7 @@ export class ListCategoryComponent implements OnInit {
       if(result){
         this.toaster.success("Delete User Successfully");
         this.router.navigate(['/category/list']);
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {

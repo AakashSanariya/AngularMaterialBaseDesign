@@ -9,12 +9,15 @@
 <!-- Add Edit Form-->
 <div #loaded>
     <mat-card>
+        <mat-card-header class="card-header-right">
+            <a [routerLink]="['/emailtemplate/list']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>keyboard_return</mat-icon>Back</button></a>
+        </mat-card-header>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
                 <mat-grid-list cols="1" rowHeight="8:1">
 
                     <div class="filter">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="standard">
                             <mat-label>Subject</mat-label>
                             <input type="text" name="email_subject" [(ngModel)]="EditDetails.email_subject"
                                    matInput

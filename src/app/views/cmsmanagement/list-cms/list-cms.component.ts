@@ -73,7 +73,7 @@ export class ListCmsComponent implements OnInit {
   };
 
   cancel = ():void => {
-    // this.dialogRef.close();
+    this.ngOnInit();
   };
 
   /* Change CMS Status*/
@@ -96,7 +96,7 @@ export class ListCmsComponent implements OnInit {
     this.cmsManagementService.changeCMSStatus(payload).subscribe(result => {
       if(result){
         this.toaster.success("User Status Change Successfully");
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {

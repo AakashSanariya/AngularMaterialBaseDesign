@@ -9,12 +9,15 @@
 <!-- Add Edit Form-->
 <div #loaded>
     <mat-card>
+        <mat-card-header class="card-header-right">
+            <a [routerLink]="['/cmsmanagement/list']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>keyboard_return</mat-icon>Back</button></a>
+        </mat-card-header>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
                 <mat-grid-list cols="1" rowHeight="8:1">
 
                     <div class="filter">
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Page Title</mat-label>
                                 <input type="text" name="page_title" [(ngModel)]="EditDetails.page_title"
                                        matInput
@@ -40,7 +43,7 @@
                     </div>
 
                     <div class="filter">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="standard">
                             <mat-label>Meta Title</mat-label>
                             <input type="text" name="meta_keywords" [(ngModel)]="EditDetails.meta_keywords"
                                    matInput
@@ -53,7 +56,7 @@
                     </div>
 
                     <div class="filter">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="standard">
                             <mat-label>Meta Description</mat-label>
                             <input type="text" name="meta_description" [(ngModel)]="EditDetails.meta_description"
                                    matInput
@@ -68,7 +71,7 @@
                     <div class="filter">
                         <mat-grid-tile>
                             <mat-label>Status &nbsp;</mat-label>
-                            <mat-radio-group aria-label="Select an Status" name="status"
+                            <mat-radio-group aria-label="Select an Status" name="status" class="radioButton"
                                              #status="ngModel"
                                              [(ngModel)]="EditDetails.status"
                                              required
@@ -76,7 +79,7 @@
                                 <mat-radio-button value="Active">Active &nbsp;</mat-radio-button>
                                 <mat-radio-button value="Inactive">Inactive</mat-radio-button>
                             </mat-radio-group>
-                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.status.errors?.required">Status Filed Required</mat-error>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.status.errors?.required">&nbsp;Status Filed Required</mat-error>
                         </mat-grid-tile>
                     </div>
 

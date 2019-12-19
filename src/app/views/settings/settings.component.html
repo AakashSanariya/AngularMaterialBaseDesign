@@ -19,6 +19,7 @@
                 <mat-grid-list cols="2" rowHeight="200">
                     <div class="filter selectImage">
                         <mat-grid-tile>
+                            <mat-label>Select Logo</mat-label>
                             <div class="chooseImage">
                                 <img [src]="logoURL" *ngIf="logoURL" height="170" width="250">
                                 <input type="file" class="browse" name="profile_logo" #profile_logo="ngModel" id="profile_logo"
@@ -28,6 +29,7 @@
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile>
+                            <mat-label>Select Favicon</mat-label>
                             <div class="imagecropper">
                                 <img [src]="faviconURL" *ngIf="faviconURL" height="170" width="250">
                                 <input type="file" class="browse" name="profile_favicon" #profile_favicon="ngModel" id="profile_favicon"
@@ -42,7 +44,7 @@
                 <mat-grid-list cols="2" rowHeight="6:1">
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Site Name</mat-label>
                                 <input type="text" name="site_name" [(ngModel)]="EditDetails.site_name"
                                        matInput
@@ -57,7 +59,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Tag Line</mat-label>
                                 <input type="text" name="tag_line" [(ngModel)]="EditDetails.tag_line"
                                        matInput
@@ -74,7 +76,7 @@
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Support Email</mat-label>
                                 <input type="email" name="support_email" [(ngModel)]="EditDetails.support_email"
                                        matInput
@@ -89,7 +91,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Contact Email</mat-label>
                                 <input type="email" name="contact_email" [(ngModel)]="EditDetails.contact_email"
                                        matInput
@@ -106,7 +108,7 @@
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Contact Number</mat-label>
                                 <input type="text" name="contact_number" [(ngModel)]="EditDetails.contact_number"
                                        matInput
@@ -121,7 +123,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Default Language</mat-label>
                                 <input type="text" name="default_language" [(ngModel)]="EditDetails.default_language"
                                        matInput
@@ -136,7 +138,7 @@
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Address</mat-label>
                                 <textarea matInput name="address" [(ngModel)]="EditDetails.address"
                                           matInput

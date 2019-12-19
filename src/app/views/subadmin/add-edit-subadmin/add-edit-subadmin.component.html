@@ -9,13 +9,16 @@
 <!-- Add Edit Form-->
 <div #loaded>
     <mat-card>
+        <mat-card-header class="card-header-right">
+            <a [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>keyboard_return</mat-icon>Back</button></a>
+        </mat-card-header>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)" [mustMatch]="['password', 'confirmPassword']">
                 <mat-grid-list cols="2" rowHeight="6:1">
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>First Name</mat-label>
                                 <input type="text" name="first_name" [(ngModel)]="EditDetails.first_name"
                                        matInput
@@ -30,7 +33,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Last Name</mat-label>
                                 <input type="text" name="last_name" [(ngModel)]="EditDetails.last_name"
                                        matInput
@@ -47,7 +50,7 @@
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>User Name</mat-label>
                                 <input type="text" name="username" [(ngModel)]="EditDetails.username"
                                        matInput
@@ -62,7 +65,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Email</mat-label>
                                 <input type="email" name="email" [(ngModel)]="EditDetails.email"
                                        matInput
@@ -79,7 +82,7 @@
 
                     <div class="filter" *ngIf="displayPassword">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Password</mat-label>
                                 <input type="password" name="password" [(ngModel)]="EditDetails.password"
                                        matInput
@@ -96,7 +99,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Confirm Password</mat-label>
                                 <input type="password" name="confirmPassword" #confirmPassword="ngModel"
                                        [(ngModel)]="EditDetails.confirmPassword"
@@ -114,7 +117,7 @@
                     </div>
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="standard">
                                 <mat-label>Select Role</mat-label>
                                 <mat-select name="role_id" #role_id="ngModel" [(ngModel)]="EditDetails.role_id" required>
                                     <mat-option *ngFor="let role of roleList" [value]="role.id">{{ role.name }}</mat-option>

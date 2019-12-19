@@ -171,7 +171,7 @@ export class RolePermissionComponent implements OnInit {
     this.rolePermissionService.changeRoleStatus(payload).subscribe(result => {
       if(result){
         this.toaster.success("Role Status Change Successfully");
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
@@ -222,7 +222,6 @@ export class RolePermissionComponent implements OnInit {
 
   /* Edit Role */
   editRole = (payload) => {
-    console.log(payload);
     this.rolePermissionService.updateRoleDialog(this.editRoleId, payload).subscribe(result => {
       if(result){
         this.toaster.success('Role Update Successfully');
@@ -231,7 +230,6 @@ export class RolePermissionComponent implements OnInit {
       }
     }, error => {
       if(error){
-        console.log(error);
         this.toaster.error('!Oops Some Error Occurs While Updating a role');
         this.router.navigate(['/rolepermission']);
       }

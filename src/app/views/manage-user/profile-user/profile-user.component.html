@@ -12,11 +12,9 @@
                 <h3>User Profile</h3>
             </mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-            <div>
-                <a class="addNewButton" [routerLink]="['/user/list']"><button  mat-flat-button color="primary"><mat-icon>arrow_back</mat-icon>Back</button></a>
-            </div>
-        </mat-card-content>
+        <mat-card-header class="card-header-right">
+            <a [routerLink]="['/user/list']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>keyboard_return</mat-icon>Back</button></a>
+        </mat-card-header>
         <mat-card-content>
             <div>
                 <mat-grid-list cols="1" rowHeight="5:1">

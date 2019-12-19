@@ -88,7 +88,7 @@ export class ListFaqComponent implements OnInit {
     this.faqService.changeFaqStatus(payload).subscribe(result => {
       if(result){
         this.toaster.success("Faq Status Change Successfully");
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
@@ -110,7 +110,7 @@ export class ListFaqComponent implements OnInit {
       if(result){
         this.toaster.success("Delete Faq Successfully");
         this.router.navigate(['/faq/list']);
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {

@@ -119,7 +119,7 @@ export class ListUserComponent implements OnInit {
     this.manageUserService.changeManageUserStatus(payload).subscribe(result => {
       if(result){
         this.toaster.success("User Status Change Successfully");
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
@@ -148,6 +148,7 @@ export class ListUserComponent implements OnInit {
     this.manageUserService.changeUserPassword(addPayload).subscribe(result => {
       if(result){
         this.toaster.success('Password Change Successfully');
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
@@ -169,7 +170,7 @@ export class ListUserComponent implements OnInit {
       if(result){
         this.toaster.success("Delete User Successfully");
         this.route.navigate(['/user/list']);
-        this.dataSource.paginator.firstPage();
+        this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
