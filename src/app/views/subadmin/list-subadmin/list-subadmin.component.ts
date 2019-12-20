@@ -45,6 +45,7 @@ export class ListSubadminComponent implements OnInit {
     }, error => {
       if(error.meta){
         this.toaster.error(error.meta.message);
+        this.route.navigate(['/dashboard']);
       }
     });
 
