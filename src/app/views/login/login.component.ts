@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {AuthService} from "../../_services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {EncrDecrService} from "../../_services/encr-decr.service";
 import {AppConfig} from "../../config/app-config";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private toaster: ToastrService,
               private router: Router,
-              private EncrDecr: EncrDecrService
+              private EncrDecr: EncrDecrService,
+              private dialog: MatDialog
   ) { }
 
   spinner: boolean = false;
@@ -47,5 +49,34 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  /* Forgot Email Dialog */
+  openForgotDialog = (templateRef: TemplateRef<any>) => {
+    this.dialog.open(templateRef, {
+      height: '300px',
+      width: '400px',
+    });
+  };
+
+
+  cancel = ():void => {
+    // this.dialogRef.close();
+  };
+
+  /* Send Forgot Email*/
+  onForgotEmail = (payload) => {
+    this.spinner = true;
+    this.authService.forgotPassword(payload).subscribe(result => {
+      if(result){
+        this.spinner = false;
+        this.toaster.success("Password Reset Link Send into your email address");
+      }
+    }, error => {
+      if(error){
+        this.spinner = false;
+        this.toaster.error("!Oops Some Error Occurs");
+      }
+    });
+  };
 
 }

@@ -19,6 +19,16 @@ export class AuthService {
     }));
   }
 
+  forgotPassword = (payload) => {
+    let addPayload = {
+      email: payload.email,
+      role: 'ADMIN'
+    };
+    return this.http.post<any>(AppConfig.forgotPassword, addPayload).pipe(map(result => {
+      return result;
+    }));
+  };
+
   logout(){
     /* For Log Out remove Token*/
     localStorage.removeItem('token');

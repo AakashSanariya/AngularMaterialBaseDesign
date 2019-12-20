@@ -6,7 +6,9 @@ export const AppConfig = {
 
     EncrDecrKey:'123456$#@$^@1ERF',
 
+    /* Login */
     userSignin: BASE_URL + API + VERSION + 'oauth/signin',
+    forgotPassword: BASE_URL + API + VERSION + 'oauth/password/forgot',
 
     /* Dashboard */
     totalUser: BASE_URL + API + 'subadmin/list',

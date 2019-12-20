@@ -1,3 +1,4 @@
+@import "../../../assets/Constant";
 mat-card{
   top:25%;
   bottom: 25%;
@@ -21,4 +22,10 @@ mat-card-content{
   margin-right: 15%;
   margin-top: 5%;
   min-width: 70%;
+}
+
+.forgotLink{
+  color: $linkColor;
+  margin-left: 10%;
+  float: left;
 }
