@@ -43,8 +43,8 @@ export class ListSubadminComponent implements OnInit {
         this.activeRole = result.data;
       }
     }, error => {
-      if(error.meta){
-        this.toaster.error(error.meta.message);
+      if(error){
+        this.toaster.error("!Oops Some Error Occurs");
         this.route.navigate(['/dashboard']);
       }
     });
