@@ -27,7 +27,7 @@
             <div class="header-logout">
                 <button mat-button [matMenuTriggerFor]="menu">{{ userName }}</button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item><mat-icon>person</mat-icon>Profile</button>
+                    <button mat-menu-item [routerLink]="['/profile']"><mat-icon>person</mat-icon>Profile</button>
                     <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
                 </mat-menu>
             </div>

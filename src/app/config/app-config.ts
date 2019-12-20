@@ -75,5 +75,10 @@ export const AppConfig = {
     getImageData: BASE_URL + API + VERSION + 'config/logo',
     getSettingData: BASE_URL + API + 'configuration/list',
     saveSettingData: BASE_URL + API + 'configuration/update',
+
+    /* Login User Profile */
+    getUserProfile: BASE_URL + API + VERSION + 'user/profile',
+    updateUserProfile: BASE_URL + API + 'subadmin/update_profile',
+    changePassword: BASE_URL + API + VERSION + 'oauth/password/change',
 };
 

@@ -32,8 +32,11 @@ export class ManageUser {
     support_email: string;
     contact_email: string;
     contact_number: string;
-    default_language: string
+    default_language: string;
+    firstname: string;
     address:string;
+    oldPassword: string;
+    newPassword: string;
 
 
 

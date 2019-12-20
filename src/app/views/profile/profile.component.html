@@ -1,0 +1,162 @@
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
+</div>
+<div #loaded>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Profile Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
+            <mat-grid-list cols="2" rowHeight="8:1">
+                <div class="filter">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="standard">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" name="first_name" [(ngModel)]="EditDetails.first_name"
+                                   matInput
+                                   placeholder="Enter First Name"
+                                   #first_name="ngModel"
+                                   required
+                                   minlength="3"
+                            >
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.first_name.errors?.required">Please Enter First Name</mat-error>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.first_name.errors?.minlength">First Name length should be min 3 cha.</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </div>
+
+                <div class="filter">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="standard">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" name="last_name" [(ngModel)]="EditDetails.last_name"
+                                   matInput
+                                   placeholder="Enter Last Name"
+                                   #last_name="ngModel"
+                                   required
+                                   minlength="3"
+                            >
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.last_name.errors?.required">Please Enter Last Name</mat-error>
+                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.last_name.errors?.minlength">Last Name length should be min 3 cha.</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </div>
+
+                <div class="filter">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="standard">
+                            <mat-label>User Name</mat-label>
+                            <input type="text" name="username" [(ngModel)]="EditDetails.username"
+                                   matInput
+                                   placeholder="Enter User Name"
+                                   #username="ngModel"
+                                   disabled
+                            >
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </div>
+
+                <div class="filter">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="standard">
+                            <mat-label>Email</mat-label>
+                            <input type="text" name="email" [(ngModel)]="EditDetails.email"
+                                   matInput
+                                   placeholder="Enter Email"
+                                   #email="ngModel"
+                                   disabled
+                            >
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </div>
+
+                <div class="filter">
+                    <mat-grid-tile>
+                        <button type="submit" mat-flat-button color="primary">Save</button>
+                    </mat-grid-tile>
+                </div>
+            </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Change Password</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #addEditPassword="ngForm" (ngSubmit)="addEditPassword.form.valid && changePassword(addEditPassword.value)" [mustMatch]="['newPassword', 'confirmPassword']">
+                <mat-grid-list cols="2" rowHeight="8:1">
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="standard">
+                                <mat-label>Current Password</mat-label>
+                                <input type="password" name="oldPassword" [(ngModel)]="EditDetails.oldPassword"
+                                       matInput
+                                       placeholder="Enter Current Password"
+                                       #oldPassword="ngModel"
+                                       required
+                                       minlength="6"
+                                >
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.oldPassword.errors?.required">Please Enter First Name</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.oldPassword.errors?.minlength">First Name length should be min 3 cha.</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="standard">
+                                <mat-label>New Password</mat-label>
+                                <input type="password" name="newPassword" [(ngModel)]="EditDetails.newPassword"
+                                       matInput
+                                       placeholder="Enter New Password"
+                                       #newPassword="ngModel"
+                                       required
+                                       minlength="6"
+                                       pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%])(?=[^^&*()_\+]*$).{6,}"
+                                >
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.newPassword.errors?.required">Please Enter New Password</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.newPassword.errors?.minlength">New Password length should be min 6 cha.</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.newPassword.errors?.pattern">Password Contain a One Small and Capital And number and special character not Contain ^&*()_+</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="standard">
+                                <mat-label>Confirm Password</mat-label>
+                                <input type="password" name="confirmPassword" [(ngModel)]="EditDetails.confirmPassword"
+                                       matInput
+                                       placeholder="Enter Confirm Password"
+                                       #confirmPassword="ngModel"
+                                       required
+                                       minlength="6"
+                                       pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%])(?=[^^&*()_\+]*$).{6,}"
+                                >
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.newPassword.errors?.required">Please Enter New Password</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.newPassword.errors?.minlength">New Password length should be min 6 cha.</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.confirmPassword.errors?.pattern">Confirm Password should match with password</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                    </div>
+
+                    <div class="filter">
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Change Password</button>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
