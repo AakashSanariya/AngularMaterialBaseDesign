@@ -9,20 +9,16 @@ const routes: Routes = [
     path: '',
     component: ListFaqComponent,
     data: {
-      title: 'FAQ Management'
-    }
+      title: 'FAQ Management',
+      breadcrumb: 'FAQ List',
+    },
   },
   {
     path: 'list',
     component: ListFaqComponent,
     data: {
       title: 'List Faq',
-      breadcrumb: [
-        {
-          label: 'list faq',
-          url: '/faq/list'
-        }
-      ]
+      breadcrumb: 'FAQ List',
     }
   },
   {
@@ -30,12 +26,7 @@ const routes: Routes = [
     component: AddEditFaqComponent,
     data: {
       title: 'Add Faq',
-      breadcrumb: [
-        {
-          label: 'list faq',
-          url: '/faq/list'
-        }
-      ]
+      breadcrumb: 'FAQ Add',
     }
   },
   {
@@ -43,14 +34,10 @@ const routes: Routes = [
     component: AddEditFaqComponent,
     data: {
       title: 'Edit Faq',
-      breadcrumb: [
-        {
-          label: 'list faq',
-          url: '/faq/list'
-        }
-      ]
+      breadcrumb: 'FAQ Edit',
     }
-  }
+  },
+  { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];
 
 @NgModule({

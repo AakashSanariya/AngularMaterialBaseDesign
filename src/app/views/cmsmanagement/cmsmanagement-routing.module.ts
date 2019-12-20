@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     component: CMSManagementComponent,
     data: {
-      title: 'CMS Managemet'
+      title: 'CMS Managemet',
+      breadcrumb: 'CMS List',
     },
     children: [
       {
@@ -18,12 +19,7 @@ const routes: Routes = [
         component: ListCmsComponent,
         data: {
           title: 'Listing CMS',
-          breadcrumb: [
-            {
-              label: 'list CMS',
-              url: '/cmsmanagement/list'
-            }
-          ]
+          breadcrumb: 'CMS List',
         },
       },
       {
@@ -31,12 +27,7 @@ const routes: Routes = [
         component: AddEditCMSComponent,
         data: {
           title: 'Add CMS',
-          breadcrumb: [
-            {
-              label: 'list CMS',
-              url: '/cmsmanagement/list'
-            }
-          ]
+          breadcrumb: 'CMS Add',
         },
       },
       {
@@ -44,14 +35,10 @@ const routes: Routes = [
         component: AddEditCMSComponent,
         data: {
           title: 'Edit CMS',
-          breadcrumb: [
-            {
-              label: 'list CMS',
-              url: '/cmsmanagement/list'
-            }
-          ]
+          breadcrumb: 'CMS Edit',
         }
-      }
+      },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
   }
 ];

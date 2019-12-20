@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     component: SubadminComponent,
     data: {
-      title: 'Manage Sub Admin'
+      title: 'Manage Sub Admin',
+      breadcrumb: 'Sub Admin List'
     },
     children: [
       {
@@ -18,12 +19,7 @@ const routes: Routes = [
         component: ListSubadminComponent,
         data: {
           title: 'List Sub Admin',
-          breadcrumb: [
-            {
-              label: 'list sub admin',
-              url: '/subadmin/list'
-            }
-          ]
+          breadcrumb: 'Sub Admin List',
         },
       },
       {
@@ -31,12 +27,7 @@ const routes: Routes = [
         component: AddEditSubadminComponent,
         data: {
           title: 'Edit Sub Admin',
-          breadcrumb: [
-            {
-              label: 'list sub admin',
-              url: '/subadmin/list'
-            }
-          ]
+          breadcrumb: 'Sub Admin Edit',
         }
       },
       {
@@ -44,16 +35,12 @@ const routes: Routes = [
         component: AddEditSubadminComponent,
         data: {
           title: 'Add Sub Admin',
-          breadcrumb: [
-            {
-              label: 'list sub admin',
-              url: '/subadmin/list'
-            }
-          ]
+          breadcrumb: 'Sub Admin Add',
         }
-      }
+      },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
-  }
+  },
 ];
 
 @NgModule({

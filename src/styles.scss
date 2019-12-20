@@ -97,11 +97,9 @@ body{
 .mat-card{
   margin: 2%;
 }
-.breadcrumb{
-  .custom-bread-crumb{
-    background-color: $backcolor;
-    margin: 0%;
-  }
+.xng-breadcrumb-list{
+    background: $footerColor;
+    height: 50px;
 }
 
 /* Card Title Align Center*/

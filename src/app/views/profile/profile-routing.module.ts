@@ -9,12 +9,7 @@ const routes: Routes = [
     component: ProfileComponent,
     data: {
       title: 'User Profile',
-      breadcrumb: [
-        {
-          label: 'Home',
-          url: '/dashboard'
-        }
-      ]
+      breadcrumb: 'User Profile',
     }
   }
 ];

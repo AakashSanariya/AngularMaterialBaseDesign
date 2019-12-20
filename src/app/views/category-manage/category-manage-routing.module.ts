@@ -11,7 +11,8 @@ const routes: Routes = [
     path: '',
     component: CategoryManageComponent,
     data: {
-      title: 'Manage Category'
+      title: 'Manage Category',
+      breadcrumb: 'list category'
     },
     children: [
       {
@@ -19,12 +20,7 @@ const routes: Routes = [
         component: ListCategoryComponent,
         data:{
           title: 'Listing Category',
-          breadcrumb: [
-            {
-              label: 'list Category',
-              url: '/category/list'
-            }
-          ]
+          breadcrumb: 'Category List',
         },
       },
       {
@@ -32,25 +28,15 @@ const routes: Routes = [
         component: AddEditCategoryComponent,
         data: {
           title: 'Add Category',
-          breadcrumb: [
-            {
-              label: 'list Category',
-              url: '/category/list'
-            }
-          ]
+          breadcrumb: 'Category Add',
         }
       },
       {
         path: 'edit/:id',
         component: AddEditCategoryComponent,
         data: {
-          title: 'Edit Category',
-          breadcrumb: [
-            {
-              label: 'list Category',
-              url: '/category/list'
-            }
-          ]
+          title: 'Category Edit',
+          breadcrumb: 'Edit Category',
         }
       },
       {
@@ -58,16 +44,12 @@ const routes: Routes = [
         component: TreeViewCategoryComponent,
         data: {
           title: 'Tree View',
-          breadcrumb: [
-            {
-              label: 'list category',
-              url: '/category/list'
-            }
-          ]
+          breadcrumb: 'TreeView Category',
         }
-      }
+      },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
-  }
+  },
 ];
 
 @NgModule({

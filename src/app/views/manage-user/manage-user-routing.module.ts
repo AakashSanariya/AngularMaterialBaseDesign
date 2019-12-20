@@ -11,7 +11,8 @@ const routes: Routes = [
     path: '',
     component: ManageUserComponent,
     data: {
-      title: 'Manage User'
+      title: 'Manage User',
+      breadcrumb: 'User List'
     },
     children: [
       {
@@ -19,12 +20,7 @@ const routes: Routes = [
         component: ListUserComponent,
         data: {
           title: 'Listing User',
-          breadcrumb: [
-            {
-              label: 'list User',
-              url: '/user/list'
-            }
-          ]
+          breadcrumb: 'User List',
         },
       },
       {
@@ -32,12 +28,7 @@ const routes: Routes = [
         component: AddEditUserComponent,
         data: {
           title: 'Edit user',
-          breadcrumb: [
-            {
-              label: 'list user',
-              url: '/user/list'
-            }
-          ]
+          breadcrumb: 'User Edit',
         }
       },
       {
@@ -45,12 +36,7 @@ const routes: Routes = [
         component: AddEditUserComponent,
         data: {
           title: 'Add User',
-          breadcrumb: [
-            {
-              label: 'list user',
-              url: '/user/list'
-            }
-          ]
+          breadcrumb: 'User Add',
         }
       },
       {
@@ -58,15 +44,10 @@ const routes: Routes = [
         component: ProfileUserComponent,
         data: {
           title: 'Profile',
-          breadcrumb: [
-            {
-              label: 'list',
-              url: '/user/list'
-            }
-          ]
+          breadcrumb: 'User Profile',
         }
-
-      }
+      },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
   }
 ];

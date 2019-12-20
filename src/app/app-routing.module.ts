@@ -6,6 +6,7 @@ import {AuthGuard} from "./_guard/auth.guard";
 
 
 const routes: Routes = [
+
   {
     path: 'login',
     component: LoginComponent,
@@ -19,21 +20,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       title: 'Home',
-      breadcrumb: [
-        {
-          label: 'Home',
-          url: '/dashboard'
-        }
-      ]
+      breadcrumb: 'Home',
     },
     children: [
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
       },
       {
         path: 'subadmin',
-        loadChildren: './views/subadmin/subadmin.module#SubadminModule'
+        loadChildren: './views/subadmin/subadmin.module#SubadminModule',
       },
       {
         path: 'user',
@@ -66,9 +62,10 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: './views/profile/profile.module#ProfileModule'
-      }
+      },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
-  }
+  },
 ];
 
 @NgModule({

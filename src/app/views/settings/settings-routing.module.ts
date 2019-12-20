@@ -9,12 +9,7 @@ const routes: Routes = [
     component: SettingsComponent,
     data: {
       title: 'Settings',
-      breadcrumb: [
-        {
-          label: 'Home',
-          url: '/dashboard'
-        }
-      ]
+      breadcrumb: 'Settings',
     }
   }
 ];

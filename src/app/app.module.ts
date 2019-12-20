@@ -17,6 +17,7 @@ import {NgxPermissionsModule} from "ngx-permissions";
 import {NgDynamicBreadcrumbModule} from "ng-dynamic-breadcrumb";
 import {JwtInterceptor} from "./_helpers/jwt-interceptor";
 import {SharedModule} from "./shared/shared.module";
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {SharedModule} from "./shared/shared.module";
     AppMaterialModule,
     MatSidenavModule,
     NgDynamicBreadcrumbModule,
+    BreadcrumbModule,
   ],
   providers: [
     AuthGuard,

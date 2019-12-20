@@ -9,12 +9,7 @@ const routes: Routes = [
     component: RolePermissionComponent,
     data: {
       title: 'Role Permission',
-      breadcrumb: [
-        {
-          label: 'Home',
-          url: '/dashboard'
-        }
-      ]
+      breadcrumb: 'Role Permission List',
     }
   }
 ];

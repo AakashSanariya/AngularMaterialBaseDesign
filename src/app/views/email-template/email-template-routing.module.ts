@@ -9,18 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: EmailTemplateComponent,
+    data: {
+      title: 'Email List',
+      breadcrumb: 'List Email'
+    },
     children: [
       {
         path: 'list',
         component: ListEmailComponent,
         data: {
           title: 'Listing Email',
-          breadcrumb: [
-            {
-              label: 'list Email',
-              url: '/emailtemplate/list'
-            }
-          ]
+          breadcrumb: 'Email List',
         }
       },
       {
@@ -28,14 +27,10 @@ const routes: Routes = [
         component: AddEditEmailComponent,
         data: {
           title: 'Edit Email',
-          breadcrumb: [
-            {
-              label: 'list Email',
-              url: '/emailtemplate/list'
-            }
-          ]
+          breadcrumb: 'Email Edit',
         }
-      }
+      },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
   }
 ];

@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
             map(() => {
               let route = this.activatedRoute.firstChild;
               let child = route;
-              console.log(child)
+              // console.log(child)
               while (child) {
                 if (child.firstChild) {
                   child = child.firstChild;
