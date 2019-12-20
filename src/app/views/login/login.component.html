@@ -15,9 +15,8 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Enter Your Email</mat-label>
                             <mat-icon matPrefix>email</mat-icon>
-                            <input type="text" matInput name="email" #email="ngModel" [(ngModel)]="loginForm.email" placeholder="Enter your Email" email required>
-                            <mat-error *ngIf="loginForm.invalid && loginForm.controls.email?.errors.required">Please enter email address</mat-error>
-                            <mat-error *ngIf="loginForm.invalid && loginForm.controls.email?.errors.email">Email address is not valid</mat-error>
+                            <input type="email" matInput name="email" #email="ngModel" [(ngModel)]="loginForm.email" placeholder="Enter your Email"  required>
+                            <mat-error *ngIf="loginForm.invalid && loginForm.controls.email.errors?.required">Please enter email address</mat-error>
                         </mat-form-field>
                     </div>
                     <div>

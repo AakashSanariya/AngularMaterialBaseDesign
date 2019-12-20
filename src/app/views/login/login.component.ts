@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {EncrDecrService} from "../../_services/encr-decr.service";
 import {AppConfig} from "../../config/app-config";
 import {MatDialog} from "@angular/material/dialog";
+import {ManageUser} from "../../model/manage-user";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   spinner: boolean = false;
+  loginForm = new ManageUser();
 
   ngOnInit() {
   }
