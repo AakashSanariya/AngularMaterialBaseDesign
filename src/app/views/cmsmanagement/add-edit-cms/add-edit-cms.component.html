@@ -31,7 +31,7 @@
                             </mat-form-field>
                     </div>
 
-                    <div class="filter">
+                    <div class="filter" *ngIf="description">
                         <ck-editor name="description" skin="moono-lisa" language="en"
                                    [(ngModel)]="EditDetails.description"
                                    #description="ngModel"

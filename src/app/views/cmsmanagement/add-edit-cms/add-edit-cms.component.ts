@@ -19,6 +19,7 @@ export class AddEditCMSComponent implements OnInit {
 
   editId: any;
   spinner: boolean;
+  description = null;
   EditDetails = new ManageUser();
 
   ngOnInit() {
@@ -39,6 +40,7 @@ export class AddEditCMSComponent implements OnInit {
       if(result){
         this.spinner = false;
         this.EditDetails = result.data;
+        this.description = result.data.description;
       }
     }, error => {
       if(error){
