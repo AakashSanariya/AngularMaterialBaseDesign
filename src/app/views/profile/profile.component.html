@@ -93,7 +93,7 @@
         </mat-card-header>
         <mat-card-content>
             <form #addEditPassword="ngForm" (ngSubmit)="addEditPassword.form.valid && changePassword(addEditPassword.value)" [mustMatch]="['newPassword', 'confirmPassword']">
-                <mat-grid-list cols="2" rowHeight="8:1">
+                <mat-grid-list cols="2" rowHeight="7:1">
                     <div class="filter">
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
@@ -105,8 +105,8 @@
                                        required
                                        minlength="6"
                                 >
-                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.oldPassword.errors?.required">Please Enter First Name</mat-error>
-                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.oldPassword.errors?.minlength">First Name length should be min 3 cha.</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.oldPassword.errors?.required">Please Enter Current Password</mat-error>
+                                <mat-error *ngIf="addEditPassword.invalid && addEditPassword.controls.oldPassword.errors?.minlength">Current Password length should be min 3 cha.</mat-error>
                             </mat-form-field>
                         </mat-grid-tile>
                     </div>
