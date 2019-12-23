@@ -93,6 +93,14 @@ body{
 }
 /*Spinner Over*/
 
+/* Navbar Color Change*/
+/*
+.mat-toolbar.mat-primary{
+  background: $headerColor;
+}
+*/
+
+
 /* Globally */
 .mat-card{
   margin: 2%;
@@ -222,4 +230,41 @@ body{
 /* card Header Align Button Left Side*/
 .card-header-left{
   justify-content: flex-start !important;
+}
+
+/* Listing Action Button */
+.mat-icon-button {
+  width: 15% !important;
+}
+.buttonActive{
+  color: $activeColor !important;
+}
+.buttonInactive{
+  color: $inActiveColor !important;
+}
+/* // Listing Acting Button Over*/
+
+
+
+/* Primary Color button*/
+.mat-flat-button.mat-primary{
+  background: $addButtonColor;
+
+}
+.mat-flat-button:hover{
+  background: $buttonHover;
+  color: black;
+}
+
+.mat-button.mat-primary{
+  color: $primaryButton;
+}
+
+/* Warn Color Button*/
+.mat-button.mat-warn{
+  color: $warnButton;
+}
+
+.mat-flat-button.mat-warn{
+  background: $flatWarnButton;
 }
