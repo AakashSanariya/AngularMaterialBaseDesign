@@ -164,7 +164,7 @@ export class SettingsComponent implements OnInit {
       let imageType = event.target.files[0].type;
       let imageSize = event.target.files[0].size;
       if(event.target.files.length > 0){
-        if(imageSize <= 20000){
+        if(imageSize <= 200000){
           if(imageType == 'image/jpeg' || imageType == 'image/png' || imageType == 'image/jpg'){
             var reader = new FileReader();
             reader.onload = (event:any) => {
@@ -189,7 +189,7 @@ export class SettingsComponent implements OnInit {
       let imageType = event.target.files[0].type;
       let imageSize = event.target.files[0].size;
       if(event.target.files.length > 0){
-        if(imageSize <= 20000){
+        if(imageSize <= 200000){
           if(imageType == 'image/jpeg' || imageType == 'image/png' || imageType == 'image/jpg'){
             var reader = new FileReader();
             reader.onload = (event:any) => {
