@@ -118,14 +118,17 @@ body{
 /* Card Add New Button*/
 .addNewButton{
   float: right;
-  margin-right: 1%;
+  margin-left: 2%;
 }
 /* Material Table */
 .materialTable{
   table {
     width: 100%;
   }
-
+  th{
+    color: black;
+    font-weight: bold;
+  }
   .mat-form-field {
     font-size: 14px;
     width: 100%;
@@ -171,7 +174,7 @@ body{
 
 /* Raised Button Hover*/
 .mat-raised-button:hover{
-  background-color: $primary;
+  background-color: $buttonHover;
 }
 
 /* Select Image*/
@@ -267,4 +270,17 @@ body{
 
 .mat-flat-button.mat-warn{
   background: $flatWarnButton;
+}
+
+/*Assent Color Button*/
+.mat-button.mat-accent{
+  color: $accentButton;
+}
+
+.mat-flat-button.mat-accent{
+  background: $flatAccentButton;
+}
+.mat-flat-button:hover{
+  background: $buttonHover;
+  color: white;
 }
