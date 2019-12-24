@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     }, error => {
       if(error){
         this.spinner = false;
-        this.toaster.error(error['meta'].message);
+        this.toaster.error("User Name and Password Not Match");
         this.router.navigate(['/login']);
       }
     });
