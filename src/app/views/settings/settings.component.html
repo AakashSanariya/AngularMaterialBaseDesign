@@ -22,7 +22,7 @@
                             <mat-label>Select Logo</mat-label>
                             <div class="chooseImage">
                                 <img [src]="logoURL" *ngIf="logoURL" height="170" width="250">
-                                <input type="file" class="browse" name="profile_logo" #profile_logo="ngModel" id="profile_logo"
+                                <input type="file" matTooltip="Profile Logo" class="browse" name="profile_logo" #profile_logo="ngModel" id="profile_logo"
                                        [(ngModel)]="EditDetails.logoURL"
                                        (change)="changeLogoImage($event)"
                                 >
@@ -32,7 +32,7 @@
                             <mat-label>Select Favicon</mat-label>
                             <div class="imagecropper">
                                 <img [src]="faviconURL" *ngIf="faviconURL" height="170" width="250">
-                                <input type="file" class="browse" name="profile_favicon" #profile_favicon="ngModel" id="profile_favicon"
+                                <input type="file" matTooltip="Profile Favicon" class="browse" name="profile_favicon" #profile_favicon="ngModel" id="profile_favicon"
                                        [(ngModel)]="EditDetails.faviconURL"
                                        (change)="changeFavImage($event)"
                                 >
@@ -160,6 +160,7 @@
                     <div class="filter">
                         <mat-grid-tile>
                             <button type="submit" mat-flat-button color="primary">Save</button>
+                            <a [routerLink]="['/dashboard']" class="addNewButton"><button mat-flat-button color="warn"><mat-icon>close</mat-icon>Cancel</button></a>
                         </mat-grid-tile>
                     </div>
                 </mat-grid-list>

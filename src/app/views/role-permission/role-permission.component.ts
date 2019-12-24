@@ -148,7 +148,7 @@ export class RolePermissionComponent implements OnInit {
   };
 
   cancel = ():void => {
-    // this.dialogRef.close();
+    this.ngOnInit();
   };
 
   /* Status change Click*/

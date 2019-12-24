@@ -15,7 +15,7 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content class="materialTable">
-            <a [routerLink]="['/faq/add']" class="addNewButton"><button mat-flat-button color="primary">Add FAQ</button></a>
+            <a [routerLink]="['/faq/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>add</mat-icon>Add FAQ</button></a>
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
@@ -60,15 +60,16 @@
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef> Action </th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-button color="warn" [routerLink]="['/faq/edit/', row.id]"><mat-icon>edit</mat-icon></button>
+                            <button mat-button color="warn" matTooltip="Edit" [routerLink]="['/faq/edit/', row.id]"><mat-icon>edit</mat-icon></button>
                             <mat-slide-toggle
                                     [color]="accent"
                                     [checked]="row.status == 'Active'"
                                     [disabled]="disabled"
                                     (click)="openDialog(template, row)"
+                                    matTooltip="change Status"
                             >
                             </mat-slide-toggle>
-                            <button mat-button color="warn" (click)="openDeleteDialog(deleteUser, row)"><mat-icon>delete</mat-icon></button>
+                            <button mat-button color="warn" matTooltip="Delete" (click)="openDeleteDialog(deleteUser, row)"><mat-icon>delete</mat-icon></button>
                         </td>
                     </ng-container>
 
@@ -89,8 +90,8 @@
         <p>Confirm to change status?</p>
     </div>
     <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
         <button mat-raised-button  cdkFocusInitial (click)="changeFaqStatus()" color="warn">Change</button>
+        <button mat-raised-button [mat-dialog-close]="" color="accent" (click)="cancel()">Cancel</button>
     </div>
 </ng-template>
 
@@ -101,7 +102,7 @@
         <p>Are You Sure to Delete?</p>
     </div>
     <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
         <button mat-raised-button  cdkFocusInitial (click)="deleteFaqbyId()" color="warn">Delete</button>
+        <button mat-raised-button [mat-dialog-close]="" color="accent" (click)="cancel()">Cancel</button>
     </div>
 </ng-template>

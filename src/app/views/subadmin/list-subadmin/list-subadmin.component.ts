@@ -19,7 +19,7 @@ export class ListSubadminComponent implements OnInit {
   /* Mat Table */
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  displayedColumns: string[] = ['First_Name', 'Last_Name', 'Email', 'Status', 'Action'];
+  displayedColumns: string[] = ['SrNo', 'First_Name', 'Last_Name', 'email', 'Status', 'Action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   constructor(private subAdminService: ManageSubadminService,
@@ -94,6 +94,8 @@ export class ListSubadminComponent implements OnInit {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     }, error => {
       if(error.message){
@@ -112,7 +114,7 @@ export class ListSubadminComponent implements OnInit {
   };
 
   cancel = ():void => {
-    // this.dialogRef.close();
+    this.ngOnInit();
   };
 
   /* Change Sub Admin Status*/

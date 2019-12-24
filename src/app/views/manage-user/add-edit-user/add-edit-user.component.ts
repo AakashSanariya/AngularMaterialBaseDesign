@@ -33,11 +33,13 @@ export class AddEditUserComponent implements OnInit {
   maxDate = new Date();
   spinner = false;
   disabled: boolean = false;
+  emailRequired: boolean = false;
 
   ngOnInit() {
     this.route.paramMap.subscribe(param => {
       if(param.get('id') == null){
         this.displayPassword = true;
+        this.emailRequired = true;
       }
       else{
         this.editId = param.get('id');

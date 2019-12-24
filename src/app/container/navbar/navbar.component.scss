@@ -21,15 +21,9 @@
 
   }
 }
-.menuItems a:hover{
-  border-radius: 50px 20px;
-  display: block;
-  background-color: #DCDCDC;
-}
 .active{
   border-bottom: 2px solid black;
   border-top: 2px solid coral;
-  background: $buttonHover;
   //border-radius: 50px 20px;
 }
 .header-logout{

@@ -29,7 +29,7 @@ export class ListUserComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  displayedColumns: string[] = ['fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
+  displayedColumns: string[] = ['SrNo', 'fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   ngOnInit() {
@@ -78,6 +78,8 @@ export class ListUserComponent implements OnInit {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     }, error => {
       if(error.message){
@@ -96,7 +98,7 @@ export class ListUserComponent implements OnInit {
   };
 
   cancel = ():void => {
-    // this.dialogRef.close();
+    this.ngOnInit();
   };
 
   /* Status change Click*/

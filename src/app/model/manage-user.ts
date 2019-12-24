@@ -12,7 +12,7 @@ export class ManageUser {
     image_url: any;
     date_of_birth: any;
     phone_number: any;
-    gender: string;
+    gender: any;
     profile_image: any;
     fullname: string;
     page_title: string;

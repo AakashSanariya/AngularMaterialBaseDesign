@@ -13,9 +13,9 @@
             <a mat-list-item [routerLink]="['/settings']" routerLinkActive="active"><mat-icon>settings</mat-icon> Settings </a>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content class="header">
+    <mat-sidenav-content>
         <mat-toolbar color="primary">
-            <div>
+            <mat-nav-list class="menuButton">
                 <button
                         type="button"
                         aria-label="Toggle sidenav"
@@ -23,14 +23,14 @@
                         (click)="drawer.toggle()">
                     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
                 </button>
-            </div>
-            <div class="header-logout">
-                <button mat-button [matMenuTriggerFor]="menu">{{ userName }}</button>
+            </mat-nav-list>
+            <mat-nav-list class="header-logout header">
+                <button mat-button [matMenuTriggerFor]="menu">{{ userName }} <mat-icon>keyboard_arrow_down</mat-icon></button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item [routerLink]="['/profile']"><mat-icon>person</mat-icon>Profile</button>
                     <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
                 </mat-menu>
-            </div>
+            </mat-nav-list>
         </mat-toolbar>
         <div class="content">
             <div>
@@ -38,7 +38,7 @@
 
                 </xng-breadcrumb>
             </div>
-            <div>
+            <div class="allContent">
                 <router-outlet></router-outlet>
             </div>
         </div>
