@@ -23,8 +23,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let token = localStorage.getItem('token');
     let currentUser = this.EncrDecr.get(AppConfig.EncrDecrKey, token);
-
-    // let currentUserJson = JSON.parse(currentUser);
+    if (!currentUser) {
+      // not logged in so redirect to login page with the return url
+      this.router.navigate(['/login']);
+      return false;
+    }
     let currentUserJson = JSON.parse(currentUser);
     let currentUserRole = currentUserJson.user_detail.role || '';
 
