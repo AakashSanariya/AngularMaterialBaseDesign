@@ -7,7 +7,7 @@
 }
 .mat-toolbar.mat-primary {
   top: 0;
-  z-index: 1;
+  z-index: 998;
 }
 .sidenav-container {
   height: 100%;
@@ -26,10 +26,17 @@
   border-top: 2px solid coral;
   //border-radius: 50px 20px;
 }
-.header-logout{
-  margin-left:auto; margin-right:0
+.header{
+  top: 0;
+  position: sticky;
+  height: 64px;
+  .mat-icon-button{
+    flex: 0;
+  }
 }
-
+.mat-spacer{
+  flex: 2;
+}
 .mat-drawer-content{
   background-color: #DCDCDC;
 }
