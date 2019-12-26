@@ -104,7 +104,11 @@ export class ListSubadminComponent implements OnInit {
       }
     });
   };
-  
+
+  resetForm = (filterForm) => {
+    filterForm.reset();
+  };
+
   /* Status Change Of Sub Admin*/
   openDialog = (templateRef: TemplateRef<any>, data) => {
     this.changeData = data;

@@ -52,7 +52,7 @@
                     <div class="filter">
                         <mat-grid-tile>
                             <button type="submit" mat-flat-button color="primary">Filter</button>
-                            <a [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="accent"><mat-icon>refresh</mat-icon>Reset</button></a>
+                            <a [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="accent" (click)="resetForm(filterForm)"><mat-icon>refresh</mat-icon>Reset</button></a>
                         </mat-grid-tile>
                     </div>
                 </mat-grid-list>

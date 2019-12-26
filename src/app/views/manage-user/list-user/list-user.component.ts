@@ -89,6 +89,10 @@ export class ListUserComponent implements OnInit {
     });
   };
 
+  resetForm = (filterForm) => {
+    filterForm.reset();
+  };
+
   /* Status Change Dialog*/
   openDialog = (templateRef: TemplateRef<any>, data) => {
     this.changeStatus = data;
