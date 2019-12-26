@@ -17,7 +17,7 @@ export const AppConfig = {
     listSubAdmin: BASE_URL + API + 'subadmin/list',
     activateRole: BASE_URL + API + 'role/list_active/0',
     filterSubadmin: BASE_URL + API + 'user/list',
-    changeSubAdminStatus: BASE_URL + API + '/subadmin/change_status',
+    changeSubAdminStatus: BASE_URL + API + 'subadmin/change_status',
     subAdminByID: BASE_URL + API + 'subadmin/show/',
     addNewSubadmin: BASE_URL + API + 'subadmin/create',
     editSubAdmin: BASE_URL + API + 'subadmin/update/',
