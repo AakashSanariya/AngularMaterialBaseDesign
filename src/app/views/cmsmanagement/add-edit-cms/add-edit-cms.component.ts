@@ -19,15 +19,17 @@ export class AddEditCMSComponent implements OnInit {
 
   editId: any;
   spinner: boolean;
-  description = null;
+  description = false;
   EditDetails = new ManageUser();
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(param => {
       if(param.get('id') == null){
+        this.description = true;
       }
       else {
         this.editId = param.get('id');
+        this.description = true;
         this.editCMSDetails();
       }
     });

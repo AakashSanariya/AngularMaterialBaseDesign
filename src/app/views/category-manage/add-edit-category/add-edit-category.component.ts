@@ -100,7 +100,13 @@ export class AddEditCategoryComponent implements OnInit {
   addNewCategory = (payload) => {
     this.spinner = true;
     console.log(payload);
-    this.manageCategoryService.createNewCategory(payload).subscribe(result => {
+    let addPayload = {
+      'description': payload.description,
+      'name': payload.name,
+      'parent_id': payload.parent_id.id,
+      'status': payload.status
+    };
+    this.manageCategoryService.createNewCategory(addPayload).subscribe(result => {
       if(result){
         this.spinner = false;
         this.toaster.success("New Category Add Successfully");
@@ -118,8 +124,13 @@ export class AddEditCategoryComponent implements OnInit {
   /* Edit Category*/
   updateCategory = (payload) => {
     this.spinner = true;
-    console.log(payload);
-    this.manageCategoryService.updateCategoryById(this.editId, payload).subscribe(result => {
+    let addPayload = {
+      'description': payload.description,
+      'name': payload.name,
+      'parent_id': payload.parent_id.id,
+      'status': payload.status
+    };
+    this.manageCategoryService.updateCategoryById(this.editId, addPayload).subscribe(result => {
       if(result){
         this.spinner = false;
         this.toaster.success("Category Update Successfully");

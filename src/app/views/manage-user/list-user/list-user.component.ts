@@ -147,18 +147,22 @@ export class ListUserComponent implements OnInit {
 
   /* New Password Set*/
   newPassword = (payload) => {
-    let addPayload = new FormData();
-    addPayload.append('user_id', this.changePasswordId.id);
-    addPayload.append('new_password', payload.password);
-    addPayload.append('confirm_password', payload.confirmPassword);
+    let addPayload = {
+      'user_id': this.changePasswordId.id,
+      'new_password': payload.password,
+      'confirm_password': payload.confirmPassword
+    };
+    this.spinner = true;
     this.manageUserService.changeUserPassword(addPayload).subscribe(result => {
       if(result){
+        this.spinner = false;
         this.toaster.success('Password Change Successfully');
         this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
       if(error){
+        this.spinner = false;
         this.toaster.error('!Oops Some Error To Password can not Change');
         this.route.navigate(['/user/list']);
       }

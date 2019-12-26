@@ -162,18 +162,22 @@ export class ListSubadminComponent implements OnInit {
   };
 
   newPassword = (payload) => {
-    let addPayload = new FormData();
-    addPayload.append('new_password', payload.password);
-    addPayload.append('confirm_password', payload.confirmPassword);
-    addPayload.append('user_id', this.changePasswordId.id);
+    let addPayload = {
+      'user_id': this.changePasswordId.id,
+      'new_password': payload.password,
+      'confirm_password': payload.confirmPassword
+    };
+    this.spinner = true;
     this.subAdminService.paswordChange(addPayload).subscribe(result => {
       if(result){
+        this.spinner = false;
         this.toaster.success('Password Change Successfully');
         this.ngOnInit();
         this.dialog.closeAll();
       }
     }, error => {
       if(error){
+        this.spinner = false;
         this.toaster.error('!Oops Some Error To Password can not Change');
         this.route.navigate(['/subadmin/list']);
       }
