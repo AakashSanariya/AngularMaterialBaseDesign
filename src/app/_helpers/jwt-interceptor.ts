@@ -12,10 +12,10 @@ export class JwtInterceptor implements HttpInterceptor {
         let decrypted = localStorage.getItem('token');
         if(decrypted){
             let currentUser = JSON.parse(this.EncrDecr.get(AppConfig.EncrDecrKey, decrypted));
-            if (currentUser) {
+            if (currentUser && currentUser.access_token) {
                 request = request.clone({
                     setHeaders: {
-                        Authorization: 'Bearer' + ' ' + currentUser
+                        Authorization: 'Bearer' + ' ' + currentUser.access_token
                     }
                 });
             }

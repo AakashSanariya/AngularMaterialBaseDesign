@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.authService.userSignin(addPayLoad).subscribe(result => {
       if(result['meta'].status_code == 200){
         this.spinner = false;
-        let encrypted = this.EncrDecr.set(AppConfig.EncrDecrKey, result['data'].access_token);
+        let encrypted = this.EncrDecr.set(AppConfig.EncrDecrKey, result['data']);
         localStorage.setItem('token', encrypted);
         localStorage.setItem('user_name', result['data'].user_detail.first_name + ' ' + result['data'].user_detail.last_name);
         this.toaster.success('Login Successfully');

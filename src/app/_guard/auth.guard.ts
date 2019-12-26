@@ -6,6 +6,7 @@ import {
 import { Observable } from 'rxjs';
 import {EncrDecrService} from "../_services/encr-decr.service";
 import {AppConfig} from "../config/app-config";
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import {AppConfig} from "../config/app-config";
 export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(private router: Router,
-              private EncrDecr: EncrDecrService
+              private EncrDecr: EncrDecrService,
+              private permissionsService: NgxPermissionsService
   ) {}
 
   canActivate(
@@ -23,7 +25,17 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     let currentUser = this.EncrDecr.get(AppConfig.EncrDecrKey, token);
 
     // let currentUserJson = JSON.parse(currentUser);
-    if(currentUser){
+    let currentUserJson = JSON.parse(currentUser);
+    let currentUserRole = currentUserJson.user_detail.role || '';
+
+    if(currentUserRole == 'SUPER_ADMIN'){
+      this.permissionsService.loadPermissions(['SUPER_ADMIN']);
+      return true;
+    }
+    let currentUserPermissions = currentUserJson.user_detail.permission || [];
+    let routePermission = next.data.permission || null;
+    if(routePermission == null || currentUserPermissions.indexOf(routePermission) != -1){
+      this.permissionsService.loadPermissions(currentUserPermissions);
       return true;
     }
     else{

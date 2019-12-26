@@ -5,6 +5,7 @@ import {AppMaterialModule} from "./app.material.module";
 import {MustMatchDirectiveDirective} from "../validator/must-match-directive.directive";
 import {FormsModule} from "@angular/forms";
 import {ImageCropperModule} from "ngx-image-cropper";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import {ImageCropperModule} from "ngx-image-cropper";
     AppMaterialModule,
     FormsModule,
     ImageCropperModule,
+    NgxPermissionsModule.forRoot()
   ],
-  exports: [AppMaterialModule, MustMatchDirectiveDirective, FormsModule, ImageCropperModule],
+  exports: [AppMaterialModule, MustMatchDirectiveDirective, FormsModule, ImageCropperModule, NgxPermissionsModule],
   entryComponents: [],
   providers: [DatePipe],
 })

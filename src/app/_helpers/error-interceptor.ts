@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authService.logout();
                 // location.reload(true);
                 this.toastr.error("Your session has beed expired.");
-                this.router.navigate(['login']);
+                this.router.navigate(['/login']);
             }
             const error = err.error || err.statusText;
             return throwError(error);

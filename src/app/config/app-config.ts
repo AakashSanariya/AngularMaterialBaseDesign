@@ -50,7 +50,7 @@ export const AppConfig = {
     updateCategory: BASE_URL + API + 'category/update/',
     createCategory: BASE_URL + API + 'category/create',
     getCategoryTreeView: BASE_URL + API + 'category/treeview/ng6',
-    
+
     /* Email Template Management*/
     getAllEmailTemplate: BASE_URL + API + 'email_template/list',
     getEmailTemplateById: BASE_URL + API + 'email_template/show/',
@@ -83,4 +83,3 @@ export const AppConfig = {
     updateUserProfile: BASE_URL + API + 'subadmin/update_profile',
     changePassword: BASE_URL + API + VERSION + 'oauth/password/change',
 };
-
