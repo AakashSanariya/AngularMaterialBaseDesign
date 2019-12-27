@@ -33,7 +33,7 @@ export class TreeViewCategoryComponent implements OnInit {
       if(result){
         this.spinner = false;
         this.treeViewData = result.data;
-        console.log(this.treeViewData);
+        // console.log(this.treeViewData);
       }
     }, error => {
       if(error) {

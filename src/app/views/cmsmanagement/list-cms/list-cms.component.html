@@ -15,7 +15,7 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content class="materialTable">
-            <a [routerLink]="['/cmsmanagement/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>add</mat-icon>Add CMS</button></a>
+            <a *ngxPermissionsOnly="['CMS_CREATE', 'SUPER_ADMIN']" [routerLink]="['/cmsmanagement/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>add</mat-icon>Add CMS</button></a>
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
@@ -48,8 +48,9 @@
                     <ng-container matColumnDef="Action">
                         <th mat-header-cell *matHeaderCellDef> Action </th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-button color="warn" matTooltip="Edit" [routerLink]="['/cmsmanagement/edit/', row.id]"><mat-icon>edit</mat-icon></button>
+                            <button *ngxPermissionsOnly="['CMS_UPDATE', 'SUPER_ADMIN']" mat-button color="warn" matTooltip="Edit" [routerLink]="['/cmsmanagement/edit/', row.id]"><mat-icon>edit</mat-icon></button>
                             <mat-slide-toggle
+                                    *ngxPermissionsOnly="['CMS_STATUS', 'SUPER_ADMIN']"
                                     [color]="accent"
                                     [checked]="row.status == 'Active'"
                                     [disabled]="disabled"

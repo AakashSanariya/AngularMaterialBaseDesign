@@ -15,8 +15,8 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content class="materialTable">
-            <a [routerLink]="['/category/treeview']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>format_strikethrough</mat-icon>Tree View Category</button></a>
-            <a [routerLink]="['/category/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>add</mat-icon>Add Category</button></a>
+            <a *ngxPermissionsOnly="['CATEGORY_TREEVIEW', 'SUPER_ADMIN']" [routerLink]="['/category/treeview']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>format_strikethrough</mat-icon>Tree View Category</button></a>
+            <a *ngxPermissionsOnly="['CATEGORY_CREATE', 'SUPER_ADMIN']" [routerLink]="['/category/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>add</mat-icon>Add Category</button></a>
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
@@ -55,8 +55,9 @@
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef> Action </th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-button color="warn" matTooltip="Edit" [routerLink]="['/category/edit/', row.id]"><mat-icon>edit</mat-icon></button>
+                            <button *ngxPermissionsOnly="['CATEGORY_UPDATE', 'SUPER_ADMIN']" mat-button color="warn" matTooltip="Edit" [routerLink]="['/category/edit/', row.id]"><mat-icon>edit</mat-icon></button>
                             <mat-slide-toggle
+                                    *ngxPermissionsOnly="['CATEGORY_STATUS', 'SUPER_ADMIN']"
                                     [color]="accent"
                                     [checked]="row.status == 'Active'"
                                     [disabled]="disabled"
@@ -64,7 +65,7 @@
                                     matTooltip="change Status"
                             >
                             </mat-slide-toggle>
-                            <button mat-button color="warn" matTooltip="Delete" (click)="openDeleteDialog(deleteUser, row)"><mat-icon>delete</mat-icon></button>
+                            <button *ngxPermissionsOnly="['CATEGORY_DELETE', 'SUPER_ADMIN']" mat-button color="warn" matTooltip="Delete" (click)="openDeleteDialog(deleteUser, row)"><mat-icon>delete</mat-icon></button>
                         </td>
                     </ng-container>
 

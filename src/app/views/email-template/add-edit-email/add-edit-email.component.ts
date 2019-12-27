@@ -42,7 +42,7 @@ export class AddEditEmailComponent implements OnInit {
         this.spinner = false;
         this.EditDetails = result.data;
         this.email_body = result.data.email_body;
-        console.log(this.EditDetails);
+        // console.log(this.EditDetails);
       }
     }, error => {
       if(error){

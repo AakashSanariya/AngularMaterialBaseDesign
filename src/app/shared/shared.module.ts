@@ -17,7 +17,7 @@ import {NgxPermissionsModule} from "ngx-permissions";
     AppMaterialModule,
     FormsModule,
     ImageCropperModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forChild()
   ],
   exports: [AppMaterialModule, MustMatchDirectiveDirective, FormsModule, ImageCropperModule, NgxPermissionsModule],
   entryComponents: [],

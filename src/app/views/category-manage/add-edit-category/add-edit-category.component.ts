@@ -66,7 +66,7 @@ export class AddEditCategoryComponent implements OnInit {
     }
     this.manageCategoryService.findParentCategoryById(id, name).subscribe(result => {
       if(result){
-        console.log(result);
+        // console.log(result);
         let newValue={id:'0',name:'Select Category'};
         this.parentCategoryData = result.data;
         this.parentCategoryData.splice(0,1,newValue);
