@@ -7,3 +7,8 @@
 .treeview-container, .row-item{
   margin-left: 15% !important;
 }
+// For Table Scrolling
+.table-text{
+  max-height: 400px;
+  overflow: auto;
+}

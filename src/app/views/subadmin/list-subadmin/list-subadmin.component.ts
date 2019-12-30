@@ -34,6 +34,12 @@ export class ListSubadminComponent implements OnInit {
   changeData:any;
   changePasswordId: any;
   deleteSubadminId: any;
+
+  /*For pagination*/
+  totalNoRecord: number;
+  startRecord: number = 0;
+  pageIndex: number;
+  pageSize: number = 5;
   
   ngOnInit() {
 
@@ -55,13 +61,17 @@ export class ListSubadminComponent implements OnInit {
 
   /* Sub Admin Listing */
   subAdminList = () => {
-    let payload = {};
+    let payload = {
+      length: this.pageSize,
+      start: this.startRecord
+    };
     this.subAdminService.getSubadmin(payload).subscribe(result => {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.totalNoRecord = result.data.original.recordsTotal; //total records
       }
     }, error => {
       if(error['message']){
@@ -70,6 +80,13 @@ export class ListSubadminComponent implements OnInit {
         this.route.navigate(['/dashboard']);
       }
     });
+  };
+
+  /* server Side Pagination*/
+  onPagination = (event) => {
+    this.pageSize = event.pageSize;
+    this.startRecord = event.pageIndex * this.pageSize;
+    this.subAdminList();
   };
 
   applyFilter = (filterValue: string) => {
@@ -94,7 +111,7 @@ export class ListSubadminComponent implements OnInit {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     }, error => {

@@ -32,6 +32,12 @@ export class ListUserComponent implements OnInit {
   displayedColumns: string[] = ['SrNo', 'fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
+  /*For pagination*/
+  totalNoRecord: number;
+  startRecord: number = 0;
+  pageIndex: number;
+  pageSize: number = 5;
+
   ngOnInit() {
     this.listingUser();
   }
@@ -39,13 +45,17 @@ export class ListUserComponent implements OnInit {
   /*Listing Of User*/
 
   listingUser = () => {
-    let payload = {};
+    let payload = {
+      length: this.pageSize,
+      start: this.startRecord
+    };
     this.manageUserService.getManageUserList(payload).subscribe(result => {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.totalNoRecord = result.data.original.recordsTotal;
       }
     }, error => {
       if(error){
@@ -54,6 +64,14 @@ export class ListUserComponent implements OnInit {
       }
     });
   };
+
+  /* server Side Pagination*/
+  onPagination = (event) => {
+    this.pageSize = event.pageSize;
+    this.startRecord = event.pageIndex * this.pageSize;
+    this.listingUser();
+  };
+
 
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
@@ -78,7 +96,7 @@ export class ListUserComponent implements OnInit {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     }, error => {
