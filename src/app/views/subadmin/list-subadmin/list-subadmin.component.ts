@@ -30,7 +30,9 @@ export class ListSubadminComponent implements OnInit {
 
   activeRole: any;
   spinner: boolean = true;
-  managePassword = new ManageUser();
+  managePassword: any;
+  filterFormDetails = new ManageUser();
+  status: string;
   changeData:any;
   changePasswordId: any;
   deleteSubadminId: any;
@@ -95,6 +97,7 @@ export class ListSubadminComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+    this.dataSource.paginator.firstPage();
   };
 
 

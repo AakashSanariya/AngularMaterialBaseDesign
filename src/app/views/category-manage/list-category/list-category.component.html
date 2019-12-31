@@ -58,9 +58,7 @@
                             <button *ngxPermissionsOnly="['CATEGORY_UPDATE', 'SUPER_ADMIN']" mat-button color="warn" matTooltip="Edit" [routerLink]="['/category/edit/', row.id]"><mat-icon>edit</mat-icon></button>
                             <mat-slide-toggle
                                     *ngxPermissionsOnly="['CATEGORY_STATUS', 'SUPER_ADMIN']"
-                                    [color]="accent"
                                     [checked]="row.status == 'Active'"
-                                    [disabled]="disabled"
                                     (click)="openDialog(template, row)"
                                     matTooltip="change Status"
                             >

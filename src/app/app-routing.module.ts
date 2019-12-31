@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from "./views/login/login.component";
 import {NavbarComponent} from "./container/navbar/navbar.component";
 import {AuthGuard} from "./_guard/auth.guard";
+import {Page404Component} from "./views/error/page404/page404.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,13 @@ const routes: Routes = [
     component: LoginComponent,
     data: {
       title: 'Login Page'
+    }
+  },
+  {
+    path: '404',
+    component: Page404Component,
+    data: {
+      title: '404 Error Page'
     }
   },
   {

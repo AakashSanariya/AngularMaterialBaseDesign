@@ -32,6 +32,8 @@ export class RolePermissionComponent implements OnInit {
   currRoleId: number;
   changeStatus: any;
   editRoleId: any;
+  roleName: string;
+  onFilterChange: any;
   editRoleDialog = new ManageUser();
 
   dropdownEnabled = true;
@@ -73,6 +75,15 @@ export class RolePermissionComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }
     });
+  };
+
+  /* Filter Apply */
+  applyFilter = (filterValue: string) => {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   };
   
   /* Get All Permission List*/

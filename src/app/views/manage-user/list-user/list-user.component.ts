@@ -24,8 +24,10 @@ export class ListUserComponent implements OnInit {
   spinner: boolean = true;
   changeStatus: any;
   changePasswordId: any;
-  managePassword = new ManageUser();
+  managePassword: any;
   deleteUserId: any;
+  filterFormDetails = new ManageUser();
+  status: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

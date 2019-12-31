@@ -51,9 +51,7 @@
                             <button *ngxPermissionsOnly="['CMS_UPDATE', 'SUPER_ADMIN']" mat-button color="warn" matTooltip="Edit" [routerLink]="['/cmsmanagement/edit/', row.id]"><mat-icon>edit</mat-icon></button>
                             <mat-slide-toggle
                                     *ngxPermissionsOnly="['CMS_STATUS', 'SUPER_ADMIN']"
-                                    [color]="accent"
                                     [checked]="row.status == 'Active'"
-                                    [disabled]="disabled"
                                     (click)="openDialog(template, row)"
                                     matTooltip="Change Status"
                             >

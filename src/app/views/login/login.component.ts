@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   spinner: boolean = false;
-  loginForm = new ManageUser();
+  loginDetails = new ManageUser();
+  newEmails: any;
 
   ngOnInit() {
   }

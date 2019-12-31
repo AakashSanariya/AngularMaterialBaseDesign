@@ -17,6 +17,7 @@ export class TreeViewCategoryComponent implements OnInit {
 
   spinner: boolean = true;
   treeViewData: any;
+  onMoveNode: any;
 
   options = {
     allowDrag: true,

@@ -62,9 +62,7 @@
                         <td mat-cell *matCellDef="let row">
                             <button mat-button color="warn" matTooltip="Edit" [routerLink]="['/faq/edit/', row.id]"><mat-icon>edit</mat-icon></button>
                             <mat-slide-toggle
-                                    [color]="accent"
                                     [checked]="row.status == 'Active'"
-                                    [disabled]="disabled"
                                     (click)="openDialog(template, row)"
                                     matTooltip="change Status"
                             >

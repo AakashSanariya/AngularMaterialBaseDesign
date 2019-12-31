@@ -17,14 +17,14 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Full Name</mat-label>
-                                <input type="text" name="fullname" [(ngModel)]="filterForm.fullName" matInput placeholder="Enter Full Name">
+                                <input type="text" name="fullname" [(ngModel)]="filterFormDetails.fullname" matInput placeholder="Enter Full Name">
                             </mat-form-field>
                         </mat-grid-tile>
 
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Email</mat-label>
-                                <input type="email" name="email" [(ngModel)]="filterForm.email" matInput placeholder="Enter Email">
+                                <input type="email" name="email" [(ngModel)]="filterFormDetails.email" matInput placeholder="Enter Email">
                             </mat-form-field>
                         </mat-grid-tile>
                     </div>
@@ -43,7 +43,7 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Select Role</mat-label>
-                                <mat-select name="role" [(ngModel)]="filterForm.role">
+                                <mat-select name="role" [(ngModel)]="filterFormDetails.role">
                                     <mat-option *ngFor="let role of activeRole" [value]="role.id">{{ role.name }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -138,9 +138,7 @@
                             </button>
                             <mat-slide-toggle
                                     *ngxPermissionsOnly="['SUB_ADMIN_STATUS', 'SUPER_ADMIN']"
-                                    [color]="accent"
                                     [checked]="row.status == 'Active'"
-                                    [disabled]="disabled"
                                     (click)="openDialog(template, row)"
                                     matTooltip="change Status"
                             >

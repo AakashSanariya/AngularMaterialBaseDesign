@@ -17,14 +17,14 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Full Name</mat-label>
-                                <input type="text" name="fullname" [(ngModel)]="filterForm.fullName" matInput placeholder="Enter Full Name">
+                                <input type="text" name="fullname" [(ngModel)]="filterFormDetails.fullname" matInput placeholder="Enter Full Name">
                             </mat-form-field>
                         </mat-grid-tile>
 
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Email</mat-label>
-                                <input type="email" name="email" [(ngModel)]="filterForm.email" matInput placeholder="Enter Email">
+                                <input type="email" name="email" [(ngModel)]="filterFormDetails.email" matInput placeholder="Enter Email">
                             </mat-form-field>
                         </mat-grid-tile>
                     </div>
@@ -43,7 +43,7 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Select Gender</mat-label>
-                                <mat-select name="gender" [(ngModel)]="filterForm.gender">
+                                <mat-select name="gender" [(ngModel)]="filterFormDetails.gender">
                                     <mat-option value="Male">Male</mat-option>
                                     <mat-option value="Female">Female</mat-option>
                                 </mat-select>
@@ -54,7 +54,7 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="standard">
                                 <mat-label>Phone Number</mat-label>
-                                <input type="text" name="phone_number" [(ngModel)]="filterForm.phone_number" matInput placeholder="Enter Phone Number" maxlength="10">
+                                <input type="text" name="phone_number" [(ngModel)]="filterFormDetails.phone_number" matInput placeholder="Enter Phone Number" maxlength="10">
                             </mat-form-field>
                         </mat-grid-tile>
 
@@ -162,9 +162,7 @@
                             <button *ngxPermissionsOnly="['USER_CHANGE_PASSWORD', 'SUPER_ADMIN']" mat-button color="primary" matTooltip="change Password" (click)="openchangePassword(changePass, row)"><mat-icon>vpn_key</mat-icon></button>
                             <mat-slide-toggle
                                     *ngxPermissionsOnly="['USER_STATUS', 'SUPER_ADMIN']"
-                                    [color]="accent"
                                     [checked]="row.status == 'Active'"
-                                    [disabled]="disabled"
                                     (click)="openDialog(template, row)"
                                     matTooltip="change Status"
                             >

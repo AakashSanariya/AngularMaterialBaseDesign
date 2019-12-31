@@ -18,12 +18,14 @@ import {NgDynamicBreadcrumbModule} from "ng-dynamic-breadcrumb";
 import {JwtInterceptor} from "./_helpers/jwt-interceptor";
 import {SharedModule} from "./shared/shared.module";
 import {BreadcrumbModule} from "xng-breadcrumb";
+import {Page404Component} from "./views/error/page404/page404.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
+    Page404Component,
   ],
   imports: [
     BrowserModule,

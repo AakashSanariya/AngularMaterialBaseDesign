@@ -8,13 +8,16 @@ export class ManageUser {
     confirmPassword: string;
     status: string;
     roles: any;
+    role: any;
+    role_id: any;
+    fullname: string;
     image: any;
     image_url: any;
     date_of_birth: any;
     phone_number: any;
     gender: any;
     profile_image: any;
-    fullname: string;
+    username: string;
     page_title: string;
     description: any;
     meta_keywords: string;
@@ -37,7 +40,8 @@ export class ManageUser {
     address:string;
     oldPassword: string;
     newPassword: string;
-
+    logoURL: string;
+    faviconURL: string;
 
 
 }
