@@ -8,8 +8,9 @@
 <div #loaded>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Profile Information</mat-card-title>
+            <h3 class="card-header-left">Profile Information</h3>
         </mat-card-header>
+        <mat-divider></mat-divider>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
             <mat-grid-list cols="2" rowHeight="8:1">
@@ -90,8 +91,9 @@
 <div>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Change Password</mat-card-title>
+            <h3 class="card-header-left">Change Password</h3>
         </mat-card-header>
+        <mat-divider></mat-divider>
         <mat-card-content>
             <form #addEditPassword="ngForm" (ngSubmit)="addEditPassword.form.valid && changePassword(addEditPassword.value)" [mustMatch]="['newPassword', 'confirmPassword']">
                 <mat-grid-list cols="2" rowHeight="7:1">

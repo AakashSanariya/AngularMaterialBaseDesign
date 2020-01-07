@@ -22,6 +22,7 @@ export class ListEmailComponent implements OnInit {
   spinner: boolean = true;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  filterColumns: string[] = ['SrNo', 'email_subject', 'status', 'action'];
   displayedColumns: string[] = ['SrNo', 'email_subject', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
@@ -46,6 +47,14 @@ export class ListEmailComponent implements OnInit {
       }
     });
   };
+
+  /* Filter Display Columns*/
+  removeColumn(event) {
+    let index = this.displayedColumns.indexOf(event);
+    if(index != -1){
+      this.displayedColumns.splice(index, 1);
+    }
+  }
 
   /* Filter Apply */
   applyFilter = (filterValue: string) => {

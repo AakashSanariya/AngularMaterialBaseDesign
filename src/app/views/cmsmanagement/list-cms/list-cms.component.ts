@@ -26,6 +26,7 @@ export class ListCmsComponent implements OnInit {
   /* Mat Table */
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  filterColumns: string[] = ['SrNo', 'page_title', 'Status', 'Action'];
   displayedColumns: string[] = ['SrNo', 'page_title', 'Status', 'Action'];
   dataSource: MatTableDataSource<ManageUser>;
 
@@ -55,6 +56,14 @@ export class ListCmsComponent implements OnInit {
     });
   };
 
+  /* Filter Display Columns*/
+  removeColumn(event) {
+    let index = this.displayedColumns.indexOf(event);
+    if(index != -1){
+      this.displayedColumns.splice(index, 1);
+    }
+  }
+
   /* Angular Material Search */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -68,7 +77,8 @@ export class ListCmsComponent implements OnInit {
   openDialog = (templateRef: TemplateRef<any>, data) => {
     this.changeData = data;
     this.dialog.open(templateRef, {
-      width: '600'
+      width: '600',
+      hasBackdrop: true
     });
   };
 

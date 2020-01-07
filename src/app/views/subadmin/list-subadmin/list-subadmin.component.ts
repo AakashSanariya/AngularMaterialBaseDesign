@@ -19,6 +19,7 @@ export class ListSubadminComponent implements OnInit {
   /* Mat Table */
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  filterColumns: string[] = ['SrNo', 'First_Name', 'Last_Name', 'email', 'Status', 'Action'];
   displayedColumns: string[] = ['SrNo', 'First_Name', 'Last_Name', 'email', 'Status', 'Action'];
   dataSource: MatTableDataSource<ManageUser>;
 
@@ -30,7 +31,7 @@ export class ListSubadminComponent implements OnInit {
 
   activeRole: any;
   spinner: boolean = true;
-  managePassword: any;
+  pass: any; conPass:any;
   filterFormDetails = new ManageUser();
   status: string;
   changeData:any;
@@ -59,6 +60,14 @@ export class ListSubadminComponent implements OnInit {
 
     /* User Listing */
     this.subAdminList();
+  }
+
+  /* Filter Display Columns*/
+  removeColumn(event) {
+    let index = this.displayedColumns.indexOf(event);
+    if(index != -1){
+      this.displayedColumns.splice(index, 1);
+    }
   }
 
   /* Sub Admin Listing */
@@ -100,6 +109,14 @@ export class ListSubadminComponent implements OnInit {
     this.dataSource.paginator.firstPage();
   };
 
+  /*Custom Filter Dialog*/
+  customFilterDialog = (templateRef: TemplateRef<any>) => {
+    this.dialog.open(templateRef, {
+      width: '500px',
+      height: '350px',
+      hasBackdrop: true
+    });
+  };
 
   /* Filter Submit*/
   filtersubAdmin = (payload) => {
@@ -116,6 +133,7 @@ export class ListSubadminComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result.data.original.data);
         // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.dialog.closeAll();
       }
     }, error => {
       if(error.message){
@@ -127,13 +145,16 @@ export class ListSubadminComponent implements OnInit {
 
   resetForm = (filterForm) => {
     filterForm.reset();
+    this.dialog.closeAll();
+    this.ngOnInit();
   };
 
   /* Status Change Of Sub Admin*/
   openDialog = (templateRef: TemplateRef<any>, data) => {
     this.changeData = data;
     this.dialog.open(templateRef, {
-      width: '600'
+      width: '600',
+      hasBackdrop: true
     });
   };
 
@@ -178,6 +199,7 @@ export class ListSubadminComponent implements OnInit {
     this.dialog.open(templateRef, {
       height: '400px',
       width: '600px',
+      hasBackdrop: true
     });
   };
 
@@ -207,7 +229,9 @@ export class ListSubadminComponent implements OnInit {
   /* Delete Dialog */
   openDeleteDialog = (templateRef: TemplateRef<any>, data) => {
     this.deleteSubadminId = data.id;
-    this.dialog.open(templateRef, {});
+    this.dialog.open(templateRef, {
+      hasBackdrop: true,
+    });
   };
 
   deleteSubAdmin = () => {

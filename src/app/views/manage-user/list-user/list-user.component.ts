@@ -24,13 +24,14 @@ export class ListUserComponent implements OnInit {
   spinner: boolean = true;
   changeStatus: any;
   changePasswordId: any;
-  managePassword: any;
+  pass: any; conPass:any;
   deleteUserId: any;
   filterFormDetails = new ManageUser();
   status: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  filterColumns: string[] = ['SrNo', 'fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
   displayedColumns: string[] = ['SrNo', 'fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
@@ -74,6 +75,13 @@ export class ListUserComponent implements OnInit {
     this.listingUser();
   };
 
+  /* Filter Display Columns*/
+  removeColumn(event) {
+    let index = this.displayedColumns.indexOf(event);
+    if(index != -1){
+      this.displayedColumns.splice(index, 1);
+    }
+  }
 
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
@@ -82,6 +90,15 @@ export class ListUserComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  };
+
+  /*Custom Filter Dialog*/
+  customFilterDialog = (templateRef: TemplateRef<any>) => {
+    this.dialog.open(templateRef, {
+      width: '550px',
+      height: '450px',
+      hasBackdrop: true
+    });
   };
 
   /* Filter Submit*/
@@ -100,6 +117,7 @@ export class ListUserComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result.data.original.data);
         // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.dialog.closeAll();
       }
     }, error => {
       if(error.message){
@@ -111,13 +129,16 @@ export class ListUserComponent implements OnInit {
 
   resetForm = (filterForm) => {
     filterForm.reset();
+    this.dialog.closeAll();
+    this.ngOnInit();
   };
 
   /* Status Change Dialog*/
   openDialog = (templateRef: TemplateRef<any>, data) => {
     this.changeStatus = data;
     this.dialog.open(templateRef, {
-      width: '600'
+      width: '600',
+      hasBackdrop: true
     });
   };
 
@@ -162,6 +183,7 @@ export class ListUserComponent implements OnInit {
     this.dialog.open(templateRef, {
       height: '400px',
       width: '600px',
+      hasBackdrop: true,
     });
   };
 
@@ -192,7 +214,9 @@ export class ListUserComponent implements OnInit {
   /* Delete Dialog */
   openDeleteDialog = (templateRef: TemplateRef<any>, data) => {
     this.deleteUserId = data.id;
-    this.dialog.open(templateRef, {});
+    this.dialog.open(templateRef, {
+      hasBackdrop: true,
+    });
   };
 
   deleteUserbyId = () => {

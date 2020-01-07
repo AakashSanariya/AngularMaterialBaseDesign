@@ -6,75 +6,37 @@
     </div>
 </div>
 
-<!-- Searching Or Filetering-->
-<div>
-    <mat-card>
-        <mat-card-content>
-            <form #filterForm="ngForm" (ngSubmit)="filterForm.form.valid && filtersubAdmin(filterForm.value)">
-                <mat-grid-list cols="2" rowHeight="8:1">
-
-                    <div class="filter">
-                        <mat-grid-tile>
-                            <mat-form-field appearance="standard">
-                                <mat-label>Full Name</mat-label>
-                                <input type="text" name="fullname" [(ngModel)]="filterFormDetails.fullname" matInput placeholder="Enter Full Name">
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <mat-form-field appearance="standard">
-                                <mat-label>Email</mat-label>
-                                <input type="email" name="email" [(ngModel)]="filterFormDetails.email" matInput placeholder="Enter Email">
-                            </mat-form-field>
-                        </mat-grid-tile>
-                    </div>
-
-                    <div class="filter">
-                        <mat-grid-tile>
-                            <mat-form-field appearance="standard">
-                                <mat-label>Select Status</mat-label>
-                                <mat-select name="status" [(ngModel)]="status">
-                                    <mat-option value="Active">Active</mat-option>
-                                    <mat-option value="Inactive">Inactive</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <mat-form-field appearance="standard">
-                                <mat-label>Select Role</mat-label>
-                                <mat-select name="role" [(ngModel)]="filterFormDetails.role">
-                                    <mat-option *ngFor="let role of activeRole" [value]="role.id">{{ role.name }}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </mat-grid-tile>
-                    </div>
-                    <div class="filter">
-                        <mat-grid-tile>
-                            <button type="submit" mat-flat-button color="primary">Filter</button>
-                            <a [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="accent" (click)="resetForm(filterForm)"><mat-icon>refresh</mat-icon>Reset</button></a>
-                        </mat-grid-tile>
-                    </div>
-                </mat-grid-list>
-            </form>
-        </mat-card-content>
-    </mat-card>
-</div>
-
-
 <!-- Listing Sub Admin-->
 <div>
     <mat-card #loaded>
         <mat-card-header>
-            <mat-card-title>
-                <h4>List Sub Admin</h4>
-            </mat-card-title>
+                <h3 class="card-header-left">List Sub Admin</h3>
+                <div class="card-header-right"><a *ngxPermissionsOnly="['SUB_ADMIN_CREATE', 'SUPER_ADMIN']" [routerLink]="['/subadmin/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>person_add</mat-icon>Add Sub Admin</button></a></div>
+                <div class="card-header-right"><button mat-flat-button color="warn" (click)="customFilterDialog(customFilter)"><mat-icon>filter_hdr</mat-icon>Custom Filter</button></div>
         </mat-card-header>
+        <mat-divider></mat-divider>
         <mat-card-content class="materialTable">
-            <a *ngxPermissionsOnly="['SUB_ADMIN_CREATE', 'SUPER_ADMIN']" [routerLink]="['/subadmin/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>person_add</mat-icon>Add Sub Admin</button></a>
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
+
+            <!-- Search & Filter Button-->
+            <div class="search">
+                <div>
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="Display Columns">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <mat-selection-list name="displayedColumns" #displayedColum [(ngModel)]="displayedColumns" (ngModelChange)="removeColumn($event)">
+                            <mat-list-option *ngFor="let displayCol of filterColumns" [(value)]="displayCol"  selected>
+                                {{displayCol}}
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </mat-menu>
+                </div>
+            </div>
 
             <div class="table-text mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
@@ -113,8 +75,8 @@
                     <ng-container matColumnDef="Status">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header="Status"> Status </th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-icon-button class="buttonActive" *ngIf="row.status == 'Active' "><mat-icon>done_all</mat-icon>{{ row.status }}</button>
-                            <button mat-icon-button class="buttonInactive" *ngIf="row.status == 'Inactive' "><mat-icon>close</mat-icon>{{ row.status }}</button>
+                            <button mat-icon-button class="buttonActive" *ngIf="row.status == 'Active' ">{{ row.status }}</button>
+                            <button mat-icon-button class="buttonInactive" *ngIf="row.status == 'Inactive' ">{{ row.status }}</button>
                         </td>
                     </ng-container>
 
@@ -156,14 +118,13 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
-                               showFirstLastButtons="true"
-                               [length]="totalNoRecord"
-                               (page)="onPagination($event)"
-                >
-                </mat-paginator>
             </div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                           showFirstLastButtons="true"
+                           [length]="totalNoRecord"
+                           (page)="onPagination($event)"
+            >
+            </mat-paginator>
         </mat-card-content>
     </mat-card>
 </div>
@@ -189,7 +150,7 @@
                 <div>
                     <mat-form-field appearance="standard">
                         <mat-label>Enter Password</mat-label>
-                        <input type="password" name="password" #password="ngModel" [ngModel]="managePassword.pass" matInput placeholder="Enter Password"
+                        <input type="password" name="password" #password="ngModel" [ngModel]="pass" matInput placeholder="Enter Password"
                                required
                                minlength="6"
                                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%])(?=[^^&*()_\+]*$).{6,}"
@@ -203,7 +164,7 @@
                 <div>
                     <mat-form-field appearance="standard">
                         <mat-label>Confirm Password</mat-label>
-                        <input type="password" name="confirmPassword" #confirmPassword="ngModel" [ngModel]="managePassword.conPass" matInput placeholder="Enter Confirm Password"
+                        <input type="password" name="confirmPassword" #confirmPassword="ngModel" [ngModel]="conPass" matInput placeholder="Enter Confirm Password"
                                required
                                minlength="6"
                                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%])(?=[^^&*()_\+]*$).{6,}"
@@ -231,5 +192,61 @@
     <div mat-dialog-actions>
         <button mat-raised-button  cdkFocusInitial (click)="deleteSubAdmin()" color="warn">Delete</button>
         <button mat-raised-button [mat-dialog-close]="" color="accent" (click)="cancel()">Cancel</button>
+    </div>
+</ng-template>
+
+<!--Custom Filter-->
+<ng-template #customFilter>
+    <h1 mat-dialog-title>Custom Filter</h1>
+    <div mat-dialog-content>
+        <form #filterForm="ngForm" (ngSubmit)="filterForm.form.valid && filtersubAdmin(filterForm.value)">
+            <mat-grid-list cols="2" rowHeight="3:1">
+
+                <div class="filter">
+                    <div>
+                        <mat-grid-tile>
+                            <mat-form-field>
+                                <mat-label>Full Name</mat-label>
+                                <input type="text" name="fullname" [(ngModel)]="filterFormDetails.fullname" matInput placeholder="Enter Full Name">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input type="email" name="email" [(ngModel)]="filterFormDetails.email" matInput placeholder="Enter Email">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+
+                    <div>
+                        <mat-grid-tile>
+                            <mat-form-field>
+                                <mat-label>Select Status</mat-label>
+                                <mat-select name="status" [(ngModel)]="status">
+                                    <mat-option value="Active">Active</mat-option>
+                                    <mat-option value="Inactive">Inactive</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field>
+                                <mat-label>Select Role</mat-label>
+                                <mat-select name="role" [(ngModel)]="filterFormDetails.role">
+                                    <mat-option *ngFor="let role of activeRole" [value]="role.id">{{ role.name }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </div>
+                    <div>
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Filter</button>
+                            <a [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="accent" (click)="resetForm(filterForm)"><mat-icon>refresh</mat-icon>Reset</button></a>
+                        </mat-grid-tile>
+                    </div>
+                </div>
+            </mat-grid-list>
+        </form>
     </div>
 </ng-template>

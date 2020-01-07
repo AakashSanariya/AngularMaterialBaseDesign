@@ -10,15 +10,32 @@
 <div>
     <mat-card #loaded>
         <mat-card-header>
-            <mat-card-title>
-                <h4>List Email</h4>
-            </mat-card-title>
+            <h3 class="card-header-left">List Email</h3>
+            <div class="card-header-right"><!--<a [routerLink]="['/user/add']" class="addNewButton"><button mat-flat-button color="primary">Add User</button></a>--></div>
         </mat-card-header>
+        <mat-divider></mat-divider>
         <mat-card-content class="materialTable">
-            <!--<a [routerLink]="['/user/add']" class="addNewButton"><button mat-flat-button color="primary">Add User</button></a>-->
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
+
+            <!-- Search & Filter Button-->
+            <div class="search">
+                <div>
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="Display Columns">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <mat-selection-list name="displayedColumns" #displayedColum [(ngModel)]="displayedColumns" (ngModelChange)="removeColumn($event)">
+                            <mat-list-option *ngFor="let displayCol of filterColumns" [(value)]="displayCol"  selected>
+                                {{displayCol}}
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </mat-menu>
+                </div>
+            </div>
 
             <div class="table-text mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
@@ -39,8 +56,8 @@
                     <ng-container matColumnDef="status">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> Status </th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-icon-button class="buttonActive" *ngIf="row.status == 'Active' "><mat-icon>done_all</mat-icon>{{ row.status }}</button>
-                            <button mat-icon-button class="buttonInactive" *ngIf="row.status == 'Inactive' "><mat-icon>close</mat-icon>{{ row.status }}</button>
+                            <button mat-icon-button class="buttonActive" *ngIf="row.status == 'Active' ">{{ row.status }}</button>
+                            <button mat-icon-button class="buttonInactive" *ngIf="row.status == 'Inactive' ">{{ row.status }}</button>
                         </td>
                     </ng-container>
 
@@ -55,12 +72,11 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
-                               showFirstLastButtons="true"
-                >
-                </mat-paginator>
             </div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                           showFirstLastButtons="true"
+            >
+            </mat-paginator>
         </mat-card-content>
     </mat-card>
 </div>

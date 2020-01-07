@@ -16,6 +16,12 @@
   left: 0;
   right: 0;
 }
+
+/*Side Bar Name Wrap*/
+.mat-line{
+  //word-wrap: break-word !important;
+  white-space: pre-wrap !important;
+}
 @media (max-width: 600px) {
   .sidenav{
 

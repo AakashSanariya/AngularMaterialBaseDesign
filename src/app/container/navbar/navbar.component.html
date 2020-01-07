@@ -1,17 +1,66 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" mode="side" opened="true" fixedInViewport="true">
         <mat-toolbar color="primary" class="mat-spacer">Brainvire</mat-toolbar>
-        <mat-nav-list class="menuItems">
-            <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active"><mat-icon>home</mat-icon>&nbsp; Dashboard</a>
-            <a mat-list-item *ngxPermissionsOnly="['SUB_ADMIN_LIST', 'SUPER_ADMIN']" [routerLink]="['/subadmin/list']" routerLinkActive="active"><mat-icon>person</mat-icon>&nbsp; Manage sub Admin</a>
-            <a mat-list-item *ngxPermissionsOnly="['USER_LIST', 'SUPER_ADMIN']" [routerLink]="['/user/list']" routerLinkActive="active"><mat-icon>person</mat-icon>Manage User</a>
-            <a mat-list-item *ngxPermissionsOnly="['CMS_LIST', 'SUPER_ADMIN']" [routerLink]="['/cmsmanagement/list']" routerLinkActive="active"><mat-icon>inbox</mat-icon>CMS Management</a>
-            <a mat-list-item *ngxPermissionsOnly="['CATEGORY_LIST', 'SUPER_ADMIN']" [routerLink]="['/category/list']" routerLinkActive="active"><mat-icon>list</mat-icon>Category Management</a>
-            <a mat-list-item *ngxPermissionsOnly="['EMAIL_TEMP_LIST', 'SUPER_ADMIN']" [routerLink]="['/emailtemplate/list']" routerLinkActive="active"><mat-icon>email</mat-icon>Email Template</a>
-            <a mat-list-item *ngxPermissionsOnly="['FAQ_LIST', 'SUPER_ADMIN']" [routerLink]="['/faq/list']" routerLinkActive="active"><mat-icon>help_outline</mat-icon>FAQ Management </a>
-            <a mat-list-item *ngxPermissionsOnly="['SUPER_ADMIN']" [routerLink]="['/rolepermission']" routerLinkActive="active"><mat-icon>https</mat-icon>Role Permission </a>
-            <a mat-list-item *ngxPermissionsOnly="['CONFIG_LIST','SUPER_ADMIN']" [routerLink]="['/settings']" routerLinkActive="active"><mat-icon>settings</mat-icon> Settings </a>
+        <div>
+        <mat-nav-list>
+
+            <mat-list-item>
+                <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>home</mat-icon>
+                    <p mat-line>Dashboard</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['SUB_ADMIN_LIST', 'SUPER_ADMIN']" [routerLink]="['/subadmin/list']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>person</mat-icon>
+                    <p mat-line>Manage sub Admin</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['USER_LIST', 'SUPER_ADMIN']" [routerLink]="['/user/list']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>person</mat-icon>
+                    <p mat-line>Manage User</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['CMS_LIST', 'SUPER_ADMIN']" [routerLink]="['/cmsmanagement/list']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>inbox</mat-icon>
+                    <p mat-line>CMS Management</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['CATEGORY_LIST', 'SUPER_ADMIN']" [routerLink]="['/category/list']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>list</mat-icon>
+                    <p mat-line>Manage Category</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['EMAIL_TEMP_LIST', 'SUPER_ADMIN']" [routerLink]="['/emailtemplate/list']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>email</mat-icon>
+                    <p mat-line>Email Template</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['FAQ_LIST', 'SUPER_ADMIN']" [routerLink]="['/faq/list']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>help_outline</mat-icon>
+                    <p mat-line>FAQ Management</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['SUPER_ADMIN']" [routerLink]="['/rolepermission']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>https</mat-icon>
+                    <p mat-line>Role Permission</p>
+                </a>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-list-item *ngxPermissionsOnly="['CONFIG_LIST','SUPER_ADMIN']" [routerLink]="['/settings']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>settings</mat-icon>
+                    <p mat-line>Settings</p>
+                </a>
+            </mat-list-item>
+
         </mat-nav-list>
+        </div>
     </mat-sidenav>
 
     <mat-sidenav-content>
@@ -34,7 +83,7 @@
         </mat-toolbar>
         <div class="content">
             <div>
-                <xng-breadcrumb >
+                <xng-breadcrumb>
 
                 </xng-breadcrumb>
             </div>

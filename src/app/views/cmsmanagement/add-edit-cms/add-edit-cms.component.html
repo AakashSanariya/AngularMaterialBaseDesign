@@ -30,10 +30,9 @@
 
                     <div class="filter" *ngIf="description">
                         <ck-editor name="description" skin="moono-lisa" language="en"
-                                   [(ngModel)]="EditDetails.description"
                                    #description="ngModel"
+                                   [(ngModel)]="EditDetails.description"
                                    [fullPage]="true"
-                                   required
                         >
                         </ck-editor>
                         <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.description.errors?.required">Description Filed is Required</mat-error>

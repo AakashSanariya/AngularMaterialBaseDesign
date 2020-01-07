@@ -10,18 +10,14 @@
 <div>
     <mat-card #loaded>
         <mat-card-header>
-            <mat-card-title>
-                <h4>List Category Tree View</h4>
-            </mat-card-title>
+            <h3 class="card-header-left">List Category Tree View</h3>
+            <div class="card-header-right"><a [routerLink]="['/category/list']" class="addNewButton"><button mat-flat-button color="primary">Category List</button></a></div>
         </mat-card-header>
     </mat-card>
 </div>
 
 <div>
     <mat-card>
-        <mat-card-header class="card-header-right">
-            <a [routerLink]="['/category/list']" class="addNewButton"><button mat-flat-button color="primary">Category List</button></a>
-        </mat-card-header>
         <mat-card-content>
             <tree-root  (moveNode)="onMoveNode($event)" [nodes]="treeViewData" [options]="options">
                 <ng-template #treeNodeTemplate let-node let-index="index">

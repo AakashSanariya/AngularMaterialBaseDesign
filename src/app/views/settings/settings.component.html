@@ -10,8 +10,9 @@
 <div #loaded>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>General Settings</mat-card-title>
+            <h3>General Settings</h3>
         </mat-card-header>
+        <mat-divider></mat-divider>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)">
 

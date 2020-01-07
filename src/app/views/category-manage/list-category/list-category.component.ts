@@ -27,6 +27,7 @@ export class ListCategoryComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  filterColumns: string[] = ['SrNo', 'categoryName', 'parentCategory', 'status', 'action'];
   displayedColumns: string[] = ['SrNo', 'categoryName', 'parentCategory', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
@@ -47,6 +48,14 @@ export class ListCategoryComponent implements OnInit {
     });
   }
 
+  /* Filter Display Columns*/
+  removeColumn(event) {
+    let index = this.displayedColumns.indexOf(event);
+    if(index != -1){
+      this.displayedColumns.splice(index, 1);
+    }
+  }
+
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -60,7 +69,8 @@ export class ListCategoryComponent implements OnInit {
   openDialog = (templateRef: TemplateRef<any>, data) => {
     this.changeStatus = data;
     this.dialog.open(templateRef, {
-      width: '600'
+      width: '600',
+      hasBackdrop: true
     });
   };
 
@@ -102,7 +112,9 @@ export class ListCategoryComponent implements OnInit {
   /* Delete Dialog */
   openDeleteDialog = (templateRef: TemplateRef<any>, data) => {
     this.deleteUserId = data.id;
-    this.dialog.open(templateRef, {});
+    this.dialog.open(templateRef, {
+      hasBackdrop: true,
+    });
   };
 
   deleteCategorybyId = () => {
