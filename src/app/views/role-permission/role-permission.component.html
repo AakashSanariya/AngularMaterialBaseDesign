@@ -63,7 +63,7 @@
                 </button>
                 <mat-menu #menu="matMenu">
                     <mat-selection-list name="displayedColumns" #displayedColum [(ngModel)]="displayedColumns" (ngModelChange)="removeColumn($event)">
-                        <mat-list-option *ngFor="let displayCol of filterColumns" [(value)]="displayCol"  selected>
+                        <mat-list-option *ngFor="let displayCol of filterColumns" [(value)]="displayCol"  selected (click)="$event.stopPropagation()">
                             {{displayCol}}
                         </mat-list-option>
                     </mat-selection-list>
