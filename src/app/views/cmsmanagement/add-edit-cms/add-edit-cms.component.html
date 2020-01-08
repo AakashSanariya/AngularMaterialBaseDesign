@@ -29,12 +29,20 @@
                     </div>
 
                     <div class="filter" *ngIf="description">
-                        <ck-editor name="description" skin="moono-lisa" language="en"
-                                   #description="ngModel"
-                                   [(ngModel)]="EditDetails.description"
-                                   [fullPage]="true"
+                        <!--<ck-editor name="description" skin="moono-lisa" language="en"-->
+                                   <!--#description="ngModel"-->
+                                   <!--[(ngModel)]="EditDetails.description"-->
+                                   <!--[fullPage]="true"-->
+                        <!--&gt;-->
+                        <!--</ck-editor>-->
+                        <mat-label>Description<sup>*</sup></mat-label>
+                        <angular-editor name="description"
+                                        #description="ngModel"
+                                        [(ngModel)]="EditDetails.description"
+                                        [config]="editorConfig"
+                                        required
                         >
-                        </ck-editor>
+                        </angular-editor>
                         <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.description.errors?.required">Description Filed is Required</mat-error>
                     </div>
 
@@ -66,7 +74,7 @@
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-label>Status &nbsp;</mat-label>
+                            <mat-label>Status<sup>*</sup> &nbsp;</mat-label>
                             <mat-radio-group aria-label="Select an Status" name="status" class="radioButton"
                                              #status="ngModel"
                                              [(ngModel)]="EditDetails.status"

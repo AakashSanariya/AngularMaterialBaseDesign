@@ -7,6 +7,7 @@ import { ListEmailComponent } from './list-email/list-email.component';
 import { AddEditEmailComponent } from './add-edit-email/add-edit-email.component';
 import {SharedModule} from "../../shared/shared.module";
 import {CKEditorModule} from "ngx-ckeditor";
+import {AngularEditorModule} from "@kolkov/angular-editor";
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {CKEditorModule} from "ngx-ckeditor";
     CommonModule,
     EmailTemplateRoutingModule,
     CKEditorModule,
+    AngularEditorModule,
     SharedModule
   ]
 })

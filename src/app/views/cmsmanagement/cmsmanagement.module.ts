@@ -7,6 +7,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {CMSManagementComponent} from "./cmsmanagement.component";
 import { AddEditCMSComponent } from './add-edit-cms/add-edit-cms.component';
 import { CKEditorModule } from 'ngx-ckeditor';
+import {AngularEditorModule} from "@kolkov/angular-editor";
 
 @NgModule({
   declarations: [CMSManagementComponent, ListCmsComponent, AddEditCMSComponent],
@@ -14,6 +15,7 @@ import { CKEditorModule } from 'ngx-ckeditor';
     CommonModule,
     CmsmanagementRoutingModule,
     CKEditorModule,
+    AngularEditorModule,
     SharedModule,
   ]
 })

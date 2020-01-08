@@ -3,6 +3,7 @@ import {EmailTemplateService} from "../../../_services/email-template.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {ManageUser} from "../../../model/manage-user";
+import {AngularEditorConfig} from "@kolkov/angular-editor/public-api";
 
 @Component({
   selector: 'app-add-edit-email',
@@ -21,6 +22,23 @@ export class AddEditEmailComponent implements OnInit {
   email_body = null;
   editId: any;
   EditDetails = new ManageUser();
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '200px',
+    maxHeight: 'auto',
+    width: '90%',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter Content here...',
+    defaultParagraphSeparator: '',
+    uploadUrl: 'assets/Image',
+    sanitize: true,
+    toolbarPosition: 'top',
+  };
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(param => {

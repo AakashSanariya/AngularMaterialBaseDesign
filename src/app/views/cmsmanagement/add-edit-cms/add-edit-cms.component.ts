@@ -3,6 +3,7 @@ import {CmsService} from "../../../_services/cms.service";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ManageUser} from "../../../model/manage-user";
+import {AngularEditorConfig} from "@kolkov/angular-editor/public-api";
 
 @Component({
   selector: 'app-add-edit-cms',
@@ -21,6 +22,23 @@ export class AddEditCMSComponent implements OnInit {
   description = null;
   spinner: boolean;
   EditDetails = new ManageUser();
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '200px',
+    maxHeight: 'auto',
+    width: '90%',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter Content here...',
+    defaultParagraphSeparator: '',
+    uploadUrl: 'assets/Image',
+    sanitize: true,
+    toolbarPosition: 'top',
+  };
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(param => {

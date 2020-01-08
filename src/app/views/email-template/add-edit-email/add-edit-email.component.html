@@ -29,13 +29,21 @@
                     </div>
 
                     <div class="filter" *ngIf="email_body">
-                        <ck-editor name="email_body" skin="moono-lisa" language="en"
-                                   #email_body="ngModel"
-                                   [(ngModel)]="EditDetails.email_body"
-                                   [fullPage]="true"
+                        <!--<ck-editor name="email_body" skin="moono-lisa" language="en"-->
+                                   <!--#email_body="ngModel"-->
+                                   <!--[(ngModel)]="EditDetails.email_body"-->
+                                   <!--[fullPage]="true"-->
 
+                        <!--&gt;-->
+                        <!--</ck-editor>-->
+                        <mat-label>Content<sup>*</sup></mat-label>
+                        <angular-editor name="email_body"
+                                        #email_body="ngModel"
+                                        [(ngModel)]="EditDetails.email_body"
+                                        [config]="editorConfig"
+                                        required
                         >
-                        </ck-editor>
+                        </angular-editor>
                         <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.email_body?.errors?.required">Description Filed is Required</mat-error>
                     </div>
 
