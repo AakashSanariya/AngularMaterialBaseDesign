@@ -21,8 +21,8 @@ export class ListSubadminComponent implements OnInit {
   /* Mat Table */
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'status', 'action'];
-  displayedColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'status', 'action'];
+  filterColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'role', 'created_at', 'updated_at', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'role', 'created_at', 'updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   constructor(private subAdminService: ManageSubadminService,

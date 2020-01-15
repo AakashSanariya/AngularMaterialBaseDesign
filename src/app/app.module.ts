@@ -14,7 +14,6 @@ import {ToastrModule} from "ngx-toastr";
 import {ErrorInterceptor} from "./_helpers/error-interceptor";
 import {AuthGuard} from "./_guard/auth.guard";
 import {NgxPermissionsModule} from "ngx-permissions";
-import {NgDynamicBreadcrumbModule} from "ng-dynamic-breadcrumb";
 import {JwtInterceptor} from "./_helpers/jwt-interceptor";
 import {SharedModule} from "./shared/shared.module";
 import {BreadcrumbModule} from "xng-breadcrumb";
@@ -40,7 +39,6 @@ import {Page404Component} from "./views/error/page404/page404.component";
     NgxPermissionsModule.forRoot(),
     AppMaterialModule,
     MatSidenavModule,
-    NgDynamicBreadcrumbModule,
     BreadcrumbModule,
   ],
   providers: [
