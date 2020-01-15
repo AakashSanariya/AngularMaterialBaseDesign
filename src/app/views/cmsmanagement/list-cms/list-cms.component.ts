@@ -7,6 +7,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
+import {AddEditCMSComponent} from "../add-edit-cms/add-edit-cms.component";
 
 @Component({
   selector: 'app-list-cms',
@@ -26,8 +27,8 @@ export class ListCmsComponent implements OnInit {
   /* Mat Table */
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'page_title', 'Status', 'Action'];
-  displayedColumns: string[] = ['SrNo', 'page_title', 'Status', 'Action'];
+  filterColumns: string[] = ['Sr_No', 'page_title', 'Status', 'Action'];
+  displayedColumns: string[] = ['Sr_No', 'page_title', 'Status', 'Action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   spinner: boolean = true;
@@ -71,6 +72,16 @@ export class ListCmsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  };
+
+  /* Add New CMS*/
+  openAddNew = () => {
+    this.dialog.open(AddEditCMSComponent, {
+      width: '700px',
+      height: '650px',
+      hasBackdrop: true
+    });
+
   };
 
   /* Status Change Of CMS Management*/

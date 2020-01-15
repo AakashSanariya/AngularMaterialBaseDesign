@@ -11,7 +11,7 @@
     <mat-card>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)" [mustMatch]="['password', 'confirmPassword']">
-                <mat-grid-list cols="1" rowHeight="15:1">
+                <mat-grid-list cols="1" rowHeight="{{ editId ? '15:1' : '6:1' }}">
 
                     <div class="filter">
                         <mat-grid-tile>
@@ -66,14 +66,15 @@
                                 <mat-radio-button value="Active">Active &nbsp;</mat-radio-button>
                                 <mat-radio-button value="Inactive">Inactive</mat-radio-button>
                             </mat-radio-group>&nbsp;
-                            <mat-error *ngIf="addEditForm.invalid && addEditForm.controls.status.errors?.required">Status Filed Required</mat-error>
+                            <mat-error *ngIf="addEditForm.submitted && addEditForm.controls.status.errors?.required">Status Filed Required</mat-error>
                         </mat-grid-tile>
                     </div>
 
                     <div class="filter">
                         <mat-grid-tile>
                             <button type="submit" mat-flat-button color="primary">Save</button>
-                            <a [routerLink]="['/faq/list']" class="addNewButton"><button mat-flat-button color="warn"><mat-icon>close</mat-icon>Cancel</button></a>
+                            <a *ngIf="editId" [routerLink]="['/faq/list']" class="addNewButton"><button mat-flat-button color="warn"><mat-icon>close</mat-icon>Cancel</button></a>
+                            <a *ngIf="!editId" class="addNewButton"><button mat-flat-button color="warn" (click)="dialogClose()"><mat-icon>close</mat-icon>Cancel</button></a>
                         </mat-grid-tile>
                     </div>
                 </mat-grid-list>

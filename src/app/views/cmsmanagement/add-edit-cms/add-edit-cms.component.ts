@@ -4,6 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ManageUser} from "../../../model/manage-user";
 import {AngularEditorConfig} from "@kolkov/angular-editor/public-api";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-edit-cms',
@@ -15,7 +16,8 @@ export class AddEditCMSComponent implements OnInit {
   constructor(private cmsManagementService: CmsService,
               private toaster: ToastrService,
               private activatedRoute: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private dialog: MatDialog
   ) { }
 
   editId: any;
@@ -97,6 +99,10 @@ export class AddEditCMSComponent implements OnInit {
         this.router.navigate(['cmsmanagement/list']);
       }
     });
+  };
+
+  dialogClose = () => {
+    this.dialog.closeAll();
   };
 
   /* Add New CMS*/

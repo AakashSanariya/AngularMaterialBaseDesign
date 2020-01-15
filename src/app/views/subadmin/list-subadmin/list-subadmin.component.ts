@@ -7,6 +7,8 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {MatSidenav} from "@angular/material/sidenav";
+import {AddEditSubadminComponent} from "../add-edit-subadmin/add-edit-subadmin.component";
 
 @Component({
   selector: 'app-list-subadmin',
@@ -14,13 +16,13 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog
   styleUrls: ['./list-subadmin.component.scss']
 })
 export class ListSubadminComponent implements OnInit {
-
+  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
 
   /* Mat Table */
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'First_Name', 'Last_Name', 'email', 'Status', 'Action'];
-  displayedColumns: string[] = ['SrNo', 'First_Name', 'Last_Name', 'email', 'Status', 'Action'];
+  filterColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   constructor(private subAdminService: ManageSubadminService,
@@ -109,14 +111,14 @@ export class ListSubadminComponent implements OnInit {
     this.dataSource.paginator.firstPage();
   };
 
-  /*Custom Filter Dialog*/
-  customFilterDialog = (templateRef: TemplateRef<any>) => {
-    this.dialog.open(templateRef, {
-      width: '500px',
-      height: '350px',
-      hasBackdrop: true
-    });
-  };
+  // /*Custom Filter Dialog*/
+  // customFilterDialog = (templateRef: TemplateRef<any>) => {
+  //   this.dialog.open(templateRef, {
+  //     width: '500px',
+  //     height: '350px',
+  //     hasBackdrop: true
+  //   });
+  // };
 
   /* Filter Submit*/
   filtersubAdmin = (payload) => {
@@ -133,7 +135,7 @@ export class ListSubadminComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result.data.original.data);
         // this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.dialog.closeAll();
+        // this.dialog.closeAll();
       }
     }, error => {
       if(error.message){
@@ -147,6 +149,15 @@ export class ListSubadminComponent implements OnInit {
     filterForm.reset();
     this.dialog.closeAll();
     this.ngOnInit();
+  };
+
+  /* Add New Sub Admin*/
+  openAddNew = () => {
+    this.dialog.open(AddEditSubadminComponent, {
+      width: '700px',
+      height: '620px',
+      hasBackdrop: true
+    });
   };
 
   /* Status Change Of Sub Admin*/

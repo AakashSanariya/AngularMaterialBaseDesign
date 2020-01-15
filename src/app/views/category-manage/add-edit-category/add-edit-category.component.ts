@@ -3,6 +3,7 @@ import {ManageUser} from "../../../model/manage-user";
 import {CategoryManageService} from "../../../_services/category-manage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-edit-category',
@@ -14,7 +15,8 @@ export class AddEditCategoryComponent implements OnInit {
   constructor(private manageCategoryService: CategoryManageService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private toaster: ToastrService
+              private toaster: ToastrService,
+              private dialog: MatDialog
   ) { }
 
   EditDetails = new ManageUser();
@@ -84,6 +86,10 @@ export class AddEditCategoryComponent implements OnInit {
         this.router.navigate(['/category/list']);
       }
     });
+  };
+  
+  dialogClose = () => {
+    this.dialog.closeAll();
   };
 
   /* On Submit*/

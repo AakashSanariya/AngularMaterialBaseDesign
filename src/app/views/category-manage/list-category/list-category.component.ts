@@ -7,6 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {ManageUser} from "../../../model/manage-user";
 import {MatDialog} from "@angular/material/dialog";
+import {AddEditCategoryComponent} from "../add-edit-category/add-edit-category.component";
 
 @Component({
   selector: 'app-list-category',
@@ -27,8 +28,8 @@ export class ListCategoryComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'categoryName', 'parentCategory', 'status', 'action'];
-  displayedColumns: string[] = ['SrNo', 'categoryName', 'parentCategory', 'status', 'action'];
+  filterColumns: string[] = ['Sr_No', 'name', 'parent_name', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'name', 'parent_name', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   ngOnInit() {
@@ -64,6 +65,17 @@ export class ListCategoryComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   };
+
+  /* Add New List Category*/
+  openAddNew = () => {
+    this.dialog.open(AddEditCategoryComponent, {
+      width: '600px',
+      height: '370px',
+      hasBackdrop: true
+    });
+
+  };
+
 
   /* Status Change Dialog*/
   openDialog = (templateRef: TemplateRef<any>, data) => {

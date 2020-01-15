@@ -3,6 +3,7 @@ import {ManageSubadminService} from "../../../_services/manage-subadmin.service"
 import {ToastrService} from "ngx-toastr";
 import {Router, ActivatedRoute} from "@angular/router";
 import {ManageUser} from "../../../model/manage-user";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-edit-subadmin',
@@ -14,7 +15,8 @@ export class AddEditSubadminComponent implements OnInit {
   constructor(private subAdminService: ManageSubadminService,
               private toaster: ToastrService,
               private router: Router,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private dialog: MatDialog
   ) { }
 
   roleList: any;
@@ -66,6 +68,10 @@ export class AddEditSubadminComponent implements OnInit {
         this.router.navigate(['/subadmin/list']);
       }
     });
+  };
+
+  dialogClose = () => {
+    this.dialog.closeAll();
   };
 
   /* Form Submit*/

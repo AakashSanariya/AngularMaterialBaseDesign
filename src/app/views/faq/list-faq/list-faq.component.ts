@@ -7,6 +7,7 @@ import {MatSort} from "@angular/material/sort";
 import {ManageUser} from "../../../model/manage-user";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {AddEditFaqComponent} from "../add-edit-faq/add-edit-faq.component";
 
 @Component({
   selector: 'app-list-faq',
@@ -27,8 +28,8 @@ export class ListFaqComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'question', 'faq_topic', 'created_at', 'status', 'action'];
-  displayedColumns: string[] = ['SrNo', 'question', 'faq_topic', 'created_at', 'status', 'action'];
+  filterColumns: string[] = ['Sr_No', 'question', 'faq_topic', 'created_at', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'question', 'faq_topic', 'created_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   ngOnInit() {
@@ -64,6 +65,17 @@ export class ListFaqComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   };
+
+  /* Add New FAQ*/
+  openAddNew = () => {
+    this.dialog.open(AddEditFaqComponent, {
+      width: '600px',
+      height: '550px',
+      hasBackdrop: true
+    });
+
+  };
+
 
   /* Status Change Dialog*/
   openDialog = (templateRef: TemplateRef<any>, data) => {

@@ -22,8 +22,8 @@ export class ListEmailComponent implements OnInit {
   spinner: boolean = true;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'email_subject', 'status', 'action'];
-  displayedColumns: string[] = ['SrNo', 'email_subject', 'status', 'action'];
+  filterColumns: string[] = ['Sr_No', 'email_subject', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'email_subject', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   ngOnInit() {

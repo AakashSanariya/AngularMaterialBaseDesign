@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FaqService} from "../../../_services/faq.service";
 import {ToastrService} from "ngx-toastr";
 import {ManageUser} from "../../../model/manage-user";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-edit-faq',
@@ -14,7 +15,8 @@ export class AddEditFaqComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private faqSerive: FaqService,
-              private toaster: ToastrService
+              private toaster: ToastrService,
+              private dialog: MatDialog
   ) { }
 
   spinner: boolean;
@@ -64,6 +66,10 @@ export class AddEditFaqComponent implements OnInit {
         this.router.navigate(['/faq/list']);
       }
     });
+  };
+
+  dialogClose = () => {
+    this.dialog.closeAll();
   };
 
   onSubmit = (payload) => {

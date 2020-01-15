@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {Router, ActivatedRoute} from "@angular/router";
 import {ManageUserService} from "../../../_services/manage-user.service";
 import {DatePipe} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-edit-user',
@@ -17,7 +18,8 @@ export class AddEditUserComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private manageUserService: ManageUserService,
-              private DatePipe: DatePipe
+              private DatePipe: DatePipe,
+              private dialog: MatDialog
   ) { }
 
   editId: any;
@@ -140,6 +142,9 @@ export class AddEditUserComponent implements OnInit {
     }
   };
 
+  dialogClose = () => {
+    this.dialog.closeAll();
+  };
   /* Add New User*/
   addNewUser = (payload) => {
     console.log(payload);

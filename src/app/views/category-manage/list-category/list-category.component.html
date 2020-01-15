@@ -11,51 +11,51 @@
     <mat-card #loaded>
         <mat-card-header>
             <h3 class="card-header-left">List Category</h3>
-            <div class="card-header-right"><a *ngxPermissionsOnly="['CATEGORY_TREEVIEW', 'SUPER_ADMIN']" [routerLink]="['/category/treeview']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>format_strikethrough</mat-icon>Tree View Category</button></a></div>
-            <div class="card-header-right"><a *ngxPermissionsOnly="['CATEGORY_CREATE', 'SUPER_ADMIN']" [routerLink]="['/category/add']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>add</mat-icon>Add Category</button></a></div>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-content class="materialTable">
-
-            <!-- Search & Filter Button-->
-            <div class="search">
+            <div class="card-header-right">
                 <div>
                     <mat-form-field>
                         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
                     </mat-form-field>
                 </div>
-                <div>
-                    <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="Display Columns">
-                        <mat-icon>filter_list</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <mat-selection-list name="displayedColumns" #displayedColum [(ngModel)]="displayedColumns" (ngModelChange)="removeColumn($event)">
-                            <mat-list-option *ngFor="let displayCol of filterColumns" [(value)]="displayCol"  selected (click)="$event.stopPropagation()">
-                                {{displayCol}}
-                            </mat-list-option>
-                        </mat-selection-list>
-                    </mat-menu>
-                </div>
             </div>
+            <div class="card-header-right">
+                <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="Display Columns">
+                    <mat-icon>filter_list</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <mat-selection-list name="displayedColumns" #displayedColum [(ngModel)]="displayedColumns" (ngModelChange)="removeColumn($event)">
+                        <mat-list-option *ngFor="let displayCol of filterColumns" [(value)]="displayCol"  selected (click)="$event.stopPropagation()">
+                            {{displayCol |uppercase}}
+                        </mat-list-option>
+                    </mat-selection-list>
+                </mat-menu>
+            </div>
+            <div class="card-header-right"><a *ngxPermissionsOnly="['CATEGORY_TREEVIEW', 'SUPER_ADMIN']" [routerLink]="['/category/treeview']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>format_strikethrough</mat-icon>Tree View Category</button></a></div>
+            <div class="card-header-right"><button mat-flat-button color="primary" *ngxPermissionsOnly="['CATEGORY_CREATE', 'SUPER_ADMIN']" (click)="openAddNew()"><mat-icon>add</mat-icon>Add Category</button></div>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="materialTable">
+
+            <!-- Search & Filter Button-->
 
             <div class="table-text mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
 
                     <!-- Sr No Column -->
-                    <ng-container matColumnDef="SrNo">
+                    <ng-container matColumnDef="Sr_No">
                         <th mat-header-cell *matHeaderCellDef> Sr No </th>
                         <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
                     </ng-container>
 
                     <!-- Category Name Column -->
-                    <ng-container matColumnDef="categoryName">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header="categoryName"> Category Name </th>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Category Name </th>
                         <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                     </ng-container>
 
                     <!-- Parent Category Name Column -->
-                    <ng-container matColumnDef="parentCategory">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header="parentCategory"> Parent Category </th>
+                    <ng-container matColumnDef="parent_name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="parent_name"> Parent Category </th>
                         <td mat-cell *matCellDef="let row"> {{row.parent_name}} </td>
                     </ng-container>
 

@@ -7,6 +7,7 @@ import {MatSort} from "@angular/material/sort";
 import {ManageUser} from "../../../model/manage-user";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {AddEditUserComponent} from "../add-edit-user/add-edit-user.component";
 
 @Component({
   selector: 'app-list-user',
@@ -31,8 +32,8 @@ export class ListUserComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
-  displayedColumns: string[] = ['SrNo', 'fullname', 'username', 'email', 'gender', 'dateofBirth', 'phone_number', 'registered_at', 'last_updated_at', 'status', 'action'];
+  filterColumns: string[] = ['Sr_No', 'fullname', 'username', 'email', 'gender', 'date_of_birth', 'phone_number', 'created_at', 'updated_at', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'fullname', 'username', 'email', 'gender', 'date_of_birth', 'phone_number', 'created_at', 'updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   /*For pagination*/
@@ -100,7 +101,7 @@ export class ListUserComponent implements OnInit {
       hasBackdrop: true
     });
   };
-
+  
   /* Filter Submit*/
   filterUser = (payload) => {
     this.spinner = true;
@@ -131,6 +132,16 @@ export class ListUserComponent implements OnInit {
     filterForm.reset();
     this.dialog.closeAll();
     this.ngOnInit();
+  };
+
+  /* Add New User*/
+  openAddNew = () => {
+    this.dialog.open(AddEditUserComponent, {
+      width: '650px',
+      height: '650px',
+      hasBackdrop: true
+    });
+
   };
 
   /* Status Change Dialog*/

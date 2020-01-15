@@ -11,7 +11,7 @@
     <mat-card>
         <mat-card-content>
             <form #addEditForm="ngForm" (ngSubmit)="addEditForm.form.valid && onSubmit(addEditForm.value)" [mustMatch]="['password', 'confirmPassword']">
-                <mat-grid-list cols="2" rowHeight="6:1">
+                <mat-grid-list cols="2" rowHeight="{{ editId ? '6:1' : '3:1' }}">
 
                     <div class="filter">
                         <mat-grid-tile>
@@ -129,7 +129,8 @@
                     <div class="filter">
                         <mat-grid-tile>
                             <button type="submit" mat-flat-button color="primary">Save</button>
-                            <a [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="warn"><mat-icon>close</mat-icon>Cancel</button></a>
+                            <a *ngIf="editId" [routerLink]="['/subadmin/list']" class="addNewButton"><button mat-flat-button color="warn"><mat-icon>close</mat-icon>Cancel</button></a>
+                            <a *ngIf="!editId" class="addNewButton"><button mat-flat-button color="warn" (click)="dialogClose()"><mat-icon>close</mat-icon>Cancel</button></a>
                         </mat-grid-tile>
                     </div>
                 </mat-grid-list>

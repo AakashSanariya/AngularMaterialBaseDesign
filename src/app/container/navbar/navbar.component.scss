@@ -5,6 +5,12 @@
 .sidenav {
   width: 15%;
 }
+:host /deep/ .mat-list-item-content {
+  padding: 0!important;
+}
+:host /deep/ .mat-list-item-content .mat-list-text {
+  padding: 0!important;
+}
 .mat-toolbar.mat-primary {
   top: 0;
   z-index: 998;
@@ -41,7 +47,7 @@
   }
 }
 .mat-spacer{
-  flex: 2;
+  flex: 1;
 }
 .mat-drawer-content{
   background-color: #DCDCDC;

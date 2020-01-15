@@ -105,6 +105,10 @@ body{
 .mat-card{
   margin: 2%;
 }
+.mat-card-content{
+  padding-top: 10px!important;
+}
+
 .xng-breadcrumb-list{
     background: $footerColor;
     height: 50px;
@@ -118,16 +122,16 @@ body{
   float: right;
   margin-left: 2%;
 }
-.mat-card-header{
-  background: $cardHeaderBackColor;
-}
+//.mat-card-header{
+//  background: $cardHeaderBackColor;
+//}
 .mat-card-header-text{
   margin: 0 !important;
 }
 /* card Header Align Button Right Side*/
 .card-header-right{
   align-self: center;
-  margin-right: 2px;
+  margin-right: 4px;
   justify-content: center !important;
 }
 /* card Header Align Button Left Side*/
@@ -149,6 +153,10 @@ body{
     min-width: 150px;
     color: black;
     font-weight: bold;
+    font-size: 15px;
+  }
+  th.mat-header-cell{
+    padding-left: 5px !important;
   }
   .mat-form-field {
     font-size: 14px;
@@ -162,7 +170,7 @@ body{
 
   td {
     min-width: 150px;
-    text-align: center;
+    padding-left: 5px !important;
     border: 1px solid #DCDCDC;
     a {
       text-decoration-style: dotted;
@@ -180,6 +188,7 @@ body{
   overflow: hidden;
 }
 
+/* Right Side Align In Row*/
 .search{
   display: flex;
   padding-top: 5px;

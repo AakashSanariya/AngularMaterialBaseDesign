@@ -9,6 +9,9 @@ import {MatTableDataSource} from "@angular/material/table";
 import {TreeviewItem} from "ngx-treeview/src/treeview-item";
 import {TreeviewConfig} from "ngx-treeview/src/treeview-config";
 import {MatDialog} from "@angular/material/dialog";
+import {MatTreeFlattener, MatTreeFlatDataSource} from "@angular/material/tree";
+import {FlatTreeControl} from "@angular/cdk/tree";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-role-permission',
@@ -33,23 +36,16 @@ export class RolePermissionComponent implements OnInit {
   changeStatus: any;
   editRoleId: any;
   roleName: string;
-  onFilterChange: any;
   editRoleDialog = new ManageUser();
 
-  dropdownEnabled = true;
-  items: TreeviewItem[];
   treeViewData: any[];
-  values: number[];
-  config = TreeviewConfig.create({
-    hasAllCheckBox: true,
-    hasCollapseExpand: true,
-    maxHeight: 470
-  });
+  values: any = [];
+
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  filterColumns: string[] = ['SrNo', 'name', 'status', 'action'];
-  displayedColumns: string[] = ['SrNo', 'name', 'status', 'action'];
+  filterColumns: string[] = ['Sr_No', 'name', 'status', 'action'];
+  displayedColumns: string[] = ['Sr_No', 'name', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
 
   /*get All Roll List*/
@@ -98,7 +94,7 @@ export class RolePermissionComponent implements OnInit {
   /* Get All Permission List*/
   getAllPermissionList = (id) => {
     this.spinner = true;
-    const items: TreeviewItem[] = [];
+    const items: any = [];
     if (!id) {
       this.items = items;
       return;
@@ -108,6 +104,7 @@ export class RolePermissionComponent implements OnInit {
       if(result){
         this.spinner = false;
         this.treeViewData = result.data;
+        /* Making as per need for material tree view using response of api */
         for (let permission of this.treeViewData) {
           if (permission.parent == "#") {
             newArray[permission.id] = { 'text': permission.text, 'value': null, 'children': [] };
@@ -115,11 +112,18 @@ export class RolePermissionComponent implements OnInit {
             newArray[permission.parent].children.push({ 'text': permission.text, 'value': permission.id, 'checked': permission.state.selected });
           }
         }
+        /* Making as per need for material tree view using response of api */
         for (let par in newArray) {
-          const item = new TreeviewItem(newArray[par]);
+          const item = (newArray[par]);
           items.push(item);
+          /*For Old Selected Values Array*/
+          item.children.forEach(result => {
+            if(result.checked == true){
+              this.values.push(result.value)
+            }
+          });
         }
-        this.items = items;
+        this.items.data = items; // material tree node data binding after _transform call()
       }
     }, error => {
       if(error){
@@ -130,6 +134,76 @@ export class RolePermissionComponent implements OnInit {
     });
   };
 
+  /*Material Tree View Method Required*/
+  private _transformer = (node: any, level: number) => {
+    // console.log({
+    //   expandable: !!node.children,
+    //   name: node.text,
+    //   checked: node.checked,
+    //   data: node,
+    //   level: level,
+    // }, node);
+    return {
+      expandable: !!node.children,
+      name: node.text,
+      checked: node.checked,
+      data: node,
+      level: level,
+    }
+  };
+
+  treeControl = new FlatTreeControl<any>(
+      node => node.level, node => node.expandable);
+
+  /* Parameter
+      1) Transform method as parameter
+      2) Level Of Children
+      3) Expandable or not
+      4) children
+  */
+  treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
+
+  items = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener); //items Mat Tree Object
+
+  /* Material Tree View Method Required*/
+  hasChild = (_: number, node: any) => node.expandable; //if Children than
+  
+  onChangePermission = (event, data) => {
+    let index = this.values.indexOf(data);
+    if(index == '-1'){
+      this.values.push(data);
+    }
+    else{
+      this.values.splice(index, 1);
+    }
+  };
+  
+  allChecked = false;
+  removeAllChecked = false;
+  onParentChangePermission = (event:MatCheckboxChange, data) => {
+    this.allChecked = false;
+    this.removeAllChecked = false;
+    if(event.checked == true){
+      data.forEach(result => {
+        let index = this.values.indexOf(result.value);
+        if(index == '-1'){
+          this.values.push(result.value);
+        }
+      });
+      this.allChecked = true;
+    }
+    else{
+      data.forEach(result => {
+        console.log(result);
+        let index = this.values.indexOf(result.value);
+        this.values.splice(index, 1);
+      });
+      this.removeAllChecked = true;
+      console.log(this.values)
+    }
+  };
+  
+  
   /* Save Change Permission */
   savePermission = () => {
     this.spinner = true;
