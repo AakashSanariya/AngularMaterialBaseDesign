@@ -28,25 +28,27 @@
                 <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
                     <!-- use a disabled button to provide padding for tree leaf -->
                     <button mat-icon-button disabled></button>
-                    <mat-checkbox [(checked)]="removeAllChecked ? '' : allChecked ? 'checked' : node.checked"
-                                  [(ngModel)]="node.checked"
-                                  (change)="onChangePermission($event, node.data.value)"
+                    <mat-checkbox [checked]="checklistSelection.isSelected(node)"
+                                  [ngModel]="node.item.checked"
+                                  (change)="onChangePermission($event, node.item.value, node)"
                     >
-                        {{node.name}}
+                        {{node.item.text}}
                     </mat-checkbox>
                 </mat-tree-node>
                 <!-- This is the tree node template for expandable nodes -->
                 <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
                     <button mat-icon-button matTreeNodeToggle
-                            [attr.aria-label]="'toggle ' + node.name">
+                            [attr.aria-label]="'toggle ' + node.item.text">
                         <mat-icon class="mat-icon-rtl-mirror">
                             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                         </mat-icon>
                     </button>
-                    <mat-checkbox [(checked)]="node.checked"
-                                  (change)="onParentChangePermission($event, node.data.children)"
+                    <mat-checkbox [checked]="descendantsAllSelected(node)"
+                                  [indeterminate]="descendantsPartiallySelected(node)"
+                                  [ngModel]="node.item.checked"
+                                  (change)="onParentChangePermission($event, node.item.children, node)"
                     >
-                        {{node.name}}
+                        {{node.item.text}}
                     </mat-checkbox>
                 </mat-tree-node>
             </mat-tree>

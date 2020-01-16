@@ -12,6 +12,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatTreeFlattener, MatTreeFlatDataSource} from "@angular/material/tree";
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-role-permission',
@@ -24,7 +25,10 @@ export class RolePermissionComponent implements OnInit {
               private router: Router,
               private toaster: ToastrService,
               private dialog: MatDialog
-  ) { }
+  ) {
+    /*First Time Tree Control Load */
+    this.treeControl = new FlatTreeControl<ManageUser>(this.getLevel, this.isExpandable);
+  }
 
   ngOnInit() {
     this.getAllRoleList();
@@ -41,6 +45,13 @@ export class RolePermissionComponent implements OnInit {
   treeViewData: any[];
   values: any = [];
 
+  /* Tree View */
+  flatNodeMap = new Map<any, any>();
+  nestedNodeMap = new Map<any, any>();
+  treeControl: FlatTreeControl<any>;
+  treeFlattener: MatTreeFlattener<any, any>;
+  items: MatTreeFlatDataSource<any, any>;
+  checklistSelection = new SelectionModel<any>(true /* multiple */);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -123,7 +134,13 @@ export class RolePermissionComponent implements OnInit {
             }
           });
         }
-        this.items.data = items; // material tree node data binding after _transform call()
+
+        // this.items.data = items; // material tree node data binding after _transform call()
+        this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
+            this.isExpandable, this.getChildren); // tree required Information getting
+        this.treeControl = new FlatTreeControl<any>(this.getLevel, this.isExpandable);
+        this.items = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        this.items.data = items; // matTreeFlatDataSource in data push
       }
     }, error => {
       if(error){
@@ -134,73 +151,129 @@ export class RolePermissionComponent implements OnInit {
     });
   };
 
-  /*Material Tree View Method Required*/
-  private _transformer = (node: any, level: number) => {
-    // console.log({
-    //   expandable: !!node.children,
-    //   name: node.text,
-    //   checked: node.checked,
-    //   data: node,
-    //   level: level,
-    // }, node);
-    return {
-      expandable: !!node.children,
-      name: node.text,
-      checked: node.checked,
-      data: node,
-      level: level,
-    }
+  getLevel = (node: any) => node.level; // total no of level
+  isExpandable = (node: any) => node.expandable; // confirm expandable or not
+  getChildren = (node: any): any[] => node.children; // children data get
+  hasChild = (_: number, _nodeData: any) => _nodeData.expandable; //check child having or not
+
+  /*data transfer in material tree view*/
+  transformer = (node: any, level: number) => {
+    const existingNode = this.nestedNodeMap.get(node);
+    const flatNode = existingNode && existingNode.item == node.item
+        ? existingNode
+        : new ManageUser();
+    flatNode.item = node;
+    flatNode.level = level;
+    flatNode.expandable = !!node.children;
+    this.flatNodeMap.set(flatNode, node);
+    this.nestedNodeMap.set(node, flatNode);
+    return flatNode;
   };
 
-  treeControl = new FlatTreeControl<any>(
-      node => node.level, node => node.expandable);
+  /*Children all data Selection for checkbox checked display*/
+  descendantsAllSelected(node: any): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected = descendants.every(child =>{
+          this.checklistSelection.isSelected(child.item.checked)
+        }
+    );
+    return descAllSelected;
+  }
+  /* Parent Data All Selection For Checkbox checked  display*/
+  descendantsPartiallySelected(node: any): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const result = descendants.some(child => {
+      this.checklistSelection.isSelected(child.item.checked)
+    });
+    return result && !this.descendantsAllSelected(node);
+  }
 
-  /* Parameter
-      1) Transform method as parameter
-      2) Level Of Children
-      3) Expandable or not
-      4) children
-  */
-  treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
+  /* children data permission change after checked or remove */
+  onChangePermission = (event, data, node) => {
+    this.checklistSelection.toggle(node);
+    this.checkAllParentsSelection(node);
 
-  items = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener); //items Mat Tree Object
-
-  /* Material Tree View Method Required*/
-  hasChild = (_: number, node: any) => node.expandable; //if Children than
-  
-  onChangePermission = (event, data) => {
+    /* Push or Delete Value Of Checked Array*/
     let index = this.values.indexOf(data);
     if(index == '-1'){
-      this.values.push(data);
+      this.values.push(data); // checked than push value if not listed in array
     }
     else{
-      this.values.splice(index, 1);
+      this.values.splice(index, 1); // unchecked than remove value
     }
   };
-  
-  allChecked = false;
-  removeAllChecked = false;
-  onParentChangePermission = (event:MatCheckboxChange, data) => {
-    this.allChecked = false;
-    this.removeAllChecked = false;
+
+  /* Parent Select than add all it's children to permission*/
+  onParentChangePermission = (event:MatCheckboxChange, data, node) => {
+    this.checklistSelection.toggle(node); // checkbox toggle
+    const descendants = this.treeControl.getDescendants(node);
+    this.checklistSelection.isSelected(node)
+        ? this.checklistSelection.select(...descendants)
+        : this.checklistSelection.deselect(...descendants);
+
+    // Force update for the parent
+    descendants.every(child =>
+        this.checklistSelection.isSelected(child.item.checked)
+    );
+    this.checkAllParentsSelection(node);
+
     if(event.checked == true){
-      data.forEach(result => {
+      data.forEach(result => { //each children node
         let index = this.values.indexOf(result.value);
         if(index == '-1'){
-          this.values.push(result.value);
+          this.values.push(result.value); //checked than push value if not listed in array
         }
       });
-      this.allChecked = true;
     }
     else{
-      data.forEach(result => {
+      data.forEach(result => { //each children node
         console.log(result);
         let index = this.values.indexOf(result.value);
-        this.values.splice(index, 1);
+        this.values.splice(index, 1); // unchecked than remove
       });
-      this.removeAllChecked = true;
-      console.log(this.values)
     }
+  };
+
+  /* Checks all the parents when a leaf node is selected/unselected */
+  checkAllParentsSelection = (node: any): void => {
+    let parent: any | null = this.getParentNode(node);
+    while (parent) {
+      this.checkRootNodeSelection(parent);
+      parent = this.getParentNode(parent);
+    }
+  };
+
+  /*Check root node checked state and change it accordingly*/
+  checkRootNodeSelection = (node: any): void => {
+    const nodeSelected = this.checklistSelection.isSelected(node);
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected = descendants.every(child =>
+        this.checklistSelection.isSelected(child.item.checked)
+    );
+    if (nodeSelected && !descAllSelected) {
+      this.checklistSelection.deselect(node);
+    } else if (!nodeSelected && descAllSelected) {
+      this.checklistSelection.select(node);
+    }
+  };
+
+  /* Finding Parent Node*/
+  getParentNode = (node: any): any | null => {
+    const currentLevel = this.getLevel(node);
+    if (currentLevel < 1) {
+      return null;
+    }
+
+    const startIndex = this.treeControl.dataNodes.indexOf(node) - 1;
+
+    for (let i = startIndex; i >= 0; i--) {
+      const currentNode = this.treeControl.dataNodes[i];
+
+      if (this.getLevel(currentNode) < currentLevel) {
+        return currentNode;
+      }
+    }
+    return null;
   };
   
   
