@@ -121,6 +121,7 @@ export class ListSubadminComponent implements OnInit {
   // };
 
   /* Filter Submit*/
+  rolesExists: boolean;
   filtersubAdmin = (payload) => {
     this.spinner = true;
     let addPayload = {
@@ -133,7 +134,10 @@ export class ListSubadminComponent implements OnInit {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
-        // this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginator;
+        this.rolesExists = true;
+        this.filterColumns = ['Sr_No', 'first_name', 'last_name', 'email', 'created_at', 'updated_at', 'status', 'action'];
+        this.displayedColumns = ['Sr_No', 'first_name', 'last_name', 'email', 'created_at', 'updated_at', 'status', 'action'];
         this.dataSource.sort = this.sort;
         // this.dialog.closeAll();
       }

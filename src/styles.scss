@@ -328,3 +328,7 @@ body{
   background: $buttonHover;
   color: white;
 }
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none!important;
+}

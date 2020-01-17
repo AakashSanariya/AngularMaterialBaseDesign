@@ -16,7 +16,7 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
-        <mat-form-field>
+        <mat-form-field class="roleDropdown">
             <mat-label>Select Role</mat-label>
             <mat-select [(ngModel)]="currRoleId" (ngModelChange)="getAllPermissionList(currRoleId)">
                 <mat-option *ngFor="let role of listRole" [value]="role.id">{{ role.name }}</mat-option>

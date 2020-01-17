@@ -124,7 +124,7 @@
                     </ng-container>
 
                     <!-- Role -->
-                    <ng-container matColumnDef="role">
+                    <ng-container matColumnDef="role" *ngIf="!rolesExists">
                         <th mat-header-cell *matHeaderCellDef> Role </th>
                         <td mat-cell *matCellDef="let row"> {{row.roles[0].name}} </td>
                     </ng-container>

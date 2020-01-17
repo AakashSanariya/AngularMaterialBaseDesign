@@ -116,7 +116,7 @@ export class ListUserComponent implements OnInit {
       if(result.meta.status_code == 200){
         this.spinner = false;
         this.dataSource = new MatTableDataSource(result.data.original.data);
-        // this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.dialog.closeAll();
       }
