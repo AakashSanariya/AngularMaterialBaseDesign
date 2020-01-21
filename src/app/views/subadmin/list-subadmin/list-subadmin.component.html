@@ -99,7 +99,7 @@
 
         <mat-card-content class="materialTable">
             <div class="table-text mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort *ngIf="!noRecords">
+                <table mat-table [dataSource]="dataSource" matSort>
 
                     <!-- Sr No Column -->
                     <ng-container matColumnDef="Sr_No">
@@ -190,7 +190,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <div *ngIf="noRecords" class="no-records">
+                <div *ngIf="noRecords" class="no-records" colspan="9">
                     No Record's Found
                 </div>
             </div>
