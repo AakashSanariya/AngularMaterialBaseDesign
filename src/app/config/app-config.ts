@@ -1,14 +1,14 @@
-const BASE_URL = 'http://api.baselumen.demo.brainvire.com/';
+const BASE_URL = 'http://api.basestructure.com/';
 const API = 'api/';
-const VERSION = 'admin/api/v1/';
+const VERSION = 'v1/';
 
 export const AppConfig = {
 
     EncrDecrKey:'123456$#@$^@1ERF',
 
     /* Login */
-    userSignin: BASE_URL + VERSION + 'oauth/signin',
-    forgotPassword: BASE_URL + VERSION + 'oauth/password/forgot',
+    userSignin: BASE_URL + API + VERSION + 'oauth/signin',
+    forgotPassword: BASE_URL + API + VERSION + 'oauth/password/forgot',
 
     /* Dashboard */
     totalUser: BASE_URL + API + 'subadmin/list',
@@ -79,8 +79,7 @@ export const AppConfig = {
     saveSettingData: BASE_URL + API + 'configuration/update',
 
     /* Login User Profile */
-    getUserProfile: BASE_URL + VERSION + 'user/profile',
+    getUserProfile: BASE_URL + API + VERSION + 'user/profile',
     updateUserProfile: BASE_URL + API + 'subadmin/update_profile',
     changePassword: BASE_URL + API + VERSION + 'oauth/password/change',
 };
-
