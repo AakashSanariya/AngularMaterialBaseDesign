@@ -74,8 +74,7 @@
             </div>
         </div>
     </mat-drawer>
-    <mat-drawer-content>
-        <div>
+<mat-drawer-content>
 <div>
     <mat-card #loaded>
         <mat-card-header>
@@ -204,6 +203,7 @@
         </mat-card-content>
     </mat-card>
 </div>
+</mat-drawer-content>
 
 <!-- Status Change Dialog-->
 <ng-template #template>
@@ -269,9 +269,4 @@
         <button mat-raised-button  cdkFocusInitial (click)="deleteUserbyId()" color="warn">Delete</button>
         <button mat-raised-button [mat-dialog-close]="" color="accent" (click)="cancel">Cancel</button>
     </div>
-</ng-template>
-
-<!--Custom Filter-->
-<ng-template #customFilter>
-
 </ng-template>

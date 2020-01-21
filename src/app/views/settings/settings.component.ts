@@ -29,6 +29,8 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.getSettingsDetails();
+    this.logoURL = 'assets/Image/brainvireLogo.png';
+    this.faviconURL = 'assets/Image/brainvireFavicon.png';
   }
 
   /*get Settings Details*/

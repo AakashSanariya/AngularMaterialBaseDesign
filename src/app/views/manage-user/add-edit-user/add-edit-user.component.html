@@ -185,20 +185,21 @@
                     </div>
 
                     <div class="filter">
-                        <mat-grid-tile>
-                            <mat-label>Gender &nbsp;</mat-label>
+                        <mat-grid-tile  [colspan]="2">
+                            <label class="radio-label">Gender<sup>*</sup></label>
                             <mat-radio-group aria-label="Select an gender" name="gender"
+                                             class="radio-group"
                                              #gender="ngModel"
                                              [(ngModel)]="EditDetails.gender"
                                              required
                             >
-                                <mat-radio-button value="Male">Male &nbsp;</mat-radio-button>
-                                <mat-radio-button value="Female">Female</mat-radio-button>
+                                <mat-radio-button class="radio-button" value="Male">Male </mat-radio-button>
+                                <mat-radio-button class="radio-button" value="Female">Female</mat-radio-button>
                             </mat-radio-group>
-                            <mat-error *ngIf="addEditForm.submitted && addEditForm.controls.gender.errors?.required">&nbsp; Please Select Gender</mat-error>
+                            <mat-error class="radio-label radio-error" *ngIf="addEditForm.submitted && addEditForm.controls.gender.errors?.required">&nbsp; Please Select Gender</mat-error>
                         </mat-grid-tile>
 
-                        <mat-grid-tile></mat-grid-tile>
+                        <!--<mat-grid-tile></mat-grid-tile>-->
                     </div>
 
                     <div class="filter">

@@ -332,3 +332,23 @@ body{
 .mat-card:not([class*=mat-elevation-z]){
   box-shadow: none!important;
 }
+
+/* Radio Button in add Edit Form */
+.radio-group{
+  display: flex;
+  flex-direction: row;
+  margin: 3% 2%;
+}
+.radio-button {
+  margin: 5%;
+}
+.radio-label{
+  margin: 3% 0;
+}
+.radio-error{
+  font-size: 75%;
+  margin: 3% 2%;
+}
+sup{
+  color: #f44336;
+}

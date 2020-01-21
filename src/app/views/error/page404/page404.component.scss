@@ -1,0 +1,53 @@
+#fof{
+  display:block;
+  width:100%;
+  margin:100px 0;
+  line-height:1.6em;
+  text-align:center;
+}
+.hgroup{
+  text-transform:uppercase;
+}
+.hgroup h1{
+  margin-bottom:25px;
+  font-size:50px;
+}
+.hgroup h1 span{
+  display:inline-block;
+  margin-left:5px;
+  padding:5px;
+  border:1px solid #CCCCCC;
+  overflow:hidden;
+}
+.mat-icon{
+  font-size: 50px;
+  height: 50px;
+  width: 50px;
+  background: -webkit-linear-gradient(#2980b9, #2c3e50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hgroup h1 span strong{
+  display:inline-block;
+  padding:20px 20px 20px;
+  border:1px solid #CCCCCC;
+  font-weight:normal;
+}
+.hgroup h2{
+  font-size:60px;
+  margin-bottom: 25px;
+}
+.hgroup h2 span{
+  font-size:30px;
+  background: -webkit-linear-gradient(#333333, #dd1818);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#fof p{
+  margin:25px 0 0 0;
+  padding:0;
+  font-size:16px;
+}
+#fof p:first-child{
+  margin-top:0;
+}

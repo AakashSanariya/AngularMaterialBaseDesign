@@ -7,6 +7,7 @@
 </div>
 
 <!-- Listing Sub Admin-->
+<div class="content">
 <mat-drawer-container class="example-container" [hasBackdrop]="true">
     <mat-drawer #drawer [mode]="over" position="end">
         <div class="filterForm">
@@ -64,7 +65,8 @@
         </div>
         </div>
     </mat-drawer>
-    <mat-drawer-content>
+
+<mat-drawer-content>
 <div>
     <mat-card #loaded>
         <mat-card-header>
@@ -200,6 +202,8 @@
 </div>
 </mat-drawer-content>
 </mat-drawer-container>
+</div>
+
 <!-- Status Change Dialog-->
 <ng-template #template>
     <h1 mat-dialog-title>Confirm</h1>

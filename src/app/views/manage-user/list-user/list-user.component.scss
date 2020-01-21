@@ -10,9 +10,18 @@
 .example-container {
   width: 95%;
   margin: 2%;
+  mat-drawer{
+    width: 50%;
+    height: 100%;
+    padding-top: 8%;
+    background-color: #e4e5e6;
+  }
 }
-mat-drawer{
-  width: 50%;
+.mat-drawer:not(.mat-drawer-side) {
+  position: fixed;
+}
+/deep/ .mat-drawer-backdrop.mat-drawer-shown{
+  position: fixed !important;
 }
 .filterForm{
   margin: 2%;

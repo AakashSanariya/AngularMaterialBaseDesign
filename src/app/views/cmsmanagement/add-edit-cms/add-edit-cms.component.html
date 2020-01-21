@@ -74,16 +74,17 @@
 
                     <div class="filter">
                         <mat-grid-tile>
-                            <mat-label>Status<sup>*</sup> &nbsp;</mat-label>
-                            <mat-radio-group aria-label="Select an Status" name="status" class="radioButton"
+                            <mat-label class="radio-label">Status<sup>*</sup></mat-label>
+                            <mat-radio-group aria-label="Select an Status" name="status"
+                                             class="radio-group"
                                              #status="ngModel"
                                              [(ngModel)]="EditDetails.status"
                                              required
                             >
-                                <mat-radio-button value="Active">Active &nbsp;</mat-radio-button>
-                                <mat-radio-button value="Inactive">Inactive</mat-radio-button>
+                                <mat-radio-button class="radio-button" value="Active">Active</mat-radio-button>
+                                <mat-radio-button class="radio-button" value="Inactive">Inactive</mat-radio-button>
                             </mat-radio-group>
-                            <mat-error *ngIf="addEditForm.submitted && addEditForm.controls.status.errors?.required">&nbsp;Status Filed Required</mat-error>
+                            <mat-error class="radio-label radio-error" *ngIf="addEditForm.submitted && addEditForm.controls.status.errors?.required">&nbsp; Status Filed Required</mat-error>
                         </mat-grid-tile>
                     </div>
 
