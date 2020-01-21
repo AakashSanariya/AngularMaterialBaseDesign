@@ -31,6 +31,7 @@ export class ListCategoryComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'name', 'parent_name', 'status', 'action'];
   displayedColumns: string[] = ['Sr_No', 'name', 'parent_name', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   ngOnInit() {
     this.categoryManageService.getAllCategory().subscribe(result => {
@@ -60,6 +61,12 @@ export class ListCategoryComponent implements OnInit {
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

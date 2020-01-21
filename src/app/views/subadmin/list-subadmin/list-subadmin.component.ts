@@ -24,6 +24,7 @@ export class ListSubadminComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'role', 'created_at', 'updated_at', 'status', 'action'];
   displayedColumns: string[] = ['Sr_No', 'first_name', 'last_name', 'email', 'role', 'created_at', 'updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   constructor(private subAdminService: ManageSubadminService,
               private toaster: ToastrService,
@@ -104,11 +105,14 @@ export class ListSubadminComponent implements OnInit {
 
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-    this.dataSource.paginator.firstPage();
   };
 
   // /*Custom Filter Dialog*/
@@ -139,6 +143,9 @@ export class ListSubadminComponent implements OnInit {
         this.filterColumns = ['Sr_No', 'first_name', 'last_name', 'email', 'created_at', 'updated_at', 'status', 'action'];
         this.displayedColumns = ['Sr_No', 'first_name', 'last_name', 'email', 'created_at', 'updated_at', 'status', 'action'];
         this.dataSource.sort = this.sort;
+        if(result.data.original.data.length == 0 ){
+          this.noRecords = true;
+        }
         // this.dialog.closeAll();
       }
     }, error => {
@@ -151,6 +158,7 @@ export class ListSubadminComponent implements OnInit {
 
   resetForm = (filterForm) => {
     filterForm.reset();
+    this.noRecords = false;
     this.dialog.closeAll();
     this.ngOnInit();
   };

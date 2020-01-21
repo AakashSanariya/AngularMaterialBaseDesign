@@ -58,6 +58,7 @@ export class RolePermissionComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'name', 'status', 'action'];
   displayedColumns: string[] = ['Sr_No', 'name', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   /*get All Roll List*/
   getAllRoleList = () => {
@@ -96,6 +97,12 @@ export class RolePermissionComponent implements OnInit {
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -355,6 +362,7 @@ export class RolePermissionComponent implements OnInit {
     this.dialog.open(templateRef, {
       height: '300px',
       width: '400px',
+      hasBackdrop: true
     });
   };
 
@@ -385,6 +393,7 @@ export class RolePermissionComponent implements OnInit {
     this.dialog.open(templateRef, {
       height: '300px',
       width: '400px',
+      hasBackdrop: true,
     });
   };
 

@@ -37,7 +37,7 @@
 
         <mat-card-content class="materialTable">
             <div class="table-text mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort>
+                <table mat-table [dataSource]="dataSource" matSort *ngIf="!noRecords">
 
                     <!-- Sr No Column -->
                     <ng-container matColumnDef="Sr_No">
@@ -71,6 +71,9 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <div *ngIf="noRecords" class="no-records">
+                    No Record's Found
+                </div>
             </div>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
                            showFirstLastButtons="true"

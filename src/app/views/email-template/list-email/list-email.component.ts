@@ -25,6 +25,7 @@ export class ListEmailComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'email_subject', 'status', 'action'];
   displayedColumns: string[] = ['Sr_No', 'email_subject', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   ngOnInit() {
     this.listEmailTemplate();
@@ -59,6 +60,12 @@ export class ListEmailComponent implements OnInit {
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

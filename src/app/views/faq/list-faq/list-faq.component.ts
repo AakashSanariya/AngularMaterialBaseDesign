@@ -31,6 +31,7 @@ export class ListFaqComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'question', 'faq_topic', 'created_at', 'status', 'action'];
   displayedColumns: string[] = ['Sr_No', 'question', 'faq_topic', 'created_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   ngOnInit() {
     this.faqService.getAllFaq().subscribe(result => {
@@ -60,6 +61,12 @@ export class ListFaqComponent implements OnInit {
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

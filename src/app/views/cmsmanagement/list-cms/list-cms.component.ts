@@ -30,6 +30,7 @@ export class ListCmsComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'page_title', 'Status', 'Action'];
   displayedColumns: string[] = ['Sr_No', 'page_title', 'Status', 'Action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   spinner: boolean = true;
   changeData: any;
@@ -69,6 +70,12 @@ export class ListCmsComponent implements OnInit {
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
+    
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

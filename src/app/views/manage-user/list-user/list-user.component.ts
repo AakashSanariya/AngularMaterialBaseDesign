@@ -35,6 +35,7 @@ export class ListUserComponent implements OnInit {
   filterColumns: string[] = ['Sr_No', 'fullname', 'username', 'email', 'gender', 'date_of_birth', 'phone_number', 'created_at', 'updated_at', 'status', 'action'];
   displayedColumns: string[] = ['Sr_No', 'fullname', 'username', 'email', 'gender', 'date_of_birth', 'phone_number', 'created_at', 'updated_at', 'status', 'action'];
   dataSource: MatTableDataSource<ManageUser>;
+  noRecords: boolean = false;
 
   /*For pagination*/
   totalNoRecord: number;
@@ -87,7 +88,11 @@ export class ListUserComponent implements OnInit {
   /* Filter Apply */
   applyFilter = (filterValue: string) => {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
+    if(this.dataSource.filteredData.length == 0){
+      this.noRecords = true;
+    } else {
+      this.noRecords = false;
+    }
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -118,6 +123,9 @@ export class ListUserComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result.data.original.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        if(result.data.original.data.length == 0 ){
+          this.noRecords = true;
+        }
         this.dialog.closeAll();
       }
     }, error => {
@@ -130,6 +138,7 @@ export class ListUserComponent implements OnInit {
 
   resetForm = (filterForm) => {
     filterForm.reset();
+    this.noRecords = false;
     this.dialog.closeAll();
     this.ngOnInit();
   };
