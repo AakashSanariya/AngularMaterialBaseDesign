@@ -8,7 +8,7 @@
 <div #loaded>
     <mat-card>
         <mat-card-header>
-            <h3 class="card-header-left">User Profile</h3>
+            <h3 class="card-header-left"><mat-icon>person</mat-icon>User Profile</h3>
             <div class="card-header-right"><a [routerLink]="['/user/list']" class="addNewButton"><button mat-flat-button color="primary"><mat-icon>keyboard_return</mat-icon>Back</button></a></div>
         </mat-card-header>
         <mat-divider></mat-divider>
@@ -18,7 +18,7 @@
                     <div class="filter selectImage">
                         <mat-grid-tile>
                             <div class="chooseImage">
-                                <img src="{{ userProfile.profile_image }}" height="170" width="250">
+                                <img [src]="imageUrl" height="170" width="250">
                             </div>
                         </mat-grid-tile>
                     </div>

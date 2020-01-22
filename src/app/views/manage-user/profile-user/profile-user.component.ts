@@ -20,6 +20,7 @@ export class ProfileUserComponent implements OnInit {
   profileId: any;
   userProfile = new ManageUser();
   spinner: boolean = true;
+  imageUrl: any;
 
   ngOnInit() {
     this.route.paramMap.subscribe(param => {
@@ -33,7 +34,8 @@ export class ProfileUserComponent implements OnInit {
           if(result){
             this.spinner = false;
             this.userProfile = result.data;
-            console.log(this.userProfile);
+            this.imageUrl = result.data.profile_image;
+            // console.log(this.userProfile);
           }
         }, error => {
           if(error){

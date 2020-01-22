@@ -138,6 +138,9 @@ body{
 .card-header-left{
   width: 100%;
   justify-content: flex-start !important;
+  .mat-icon{
+    font-size: inherit;
+  }
 }
 .mat-divider-horizontal{
   margin-bottom: 2px;

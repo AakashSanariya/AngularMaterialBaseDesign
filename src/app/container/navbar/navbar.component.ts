@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../_services/auth.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {AppConstant} from "../../config/app-constant";
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   userName: string;
-
+  currentYear = new Date().getFullYear();
+  siteName = AppConstant.siteName;
 
 
   ngOnInit() {
